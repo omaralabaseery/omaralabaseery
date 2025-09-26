@@ -27,7 +27,7 @@ I combine a strong background in **software engineering** and **architecture** t
 
 ### 📫 How to reach me
 - **Email:** omar.alabaseery@gmail.com  
-- **LinkedIn:** [linkedin.com/in/omar-alabaseery](https://www.linkedin.com/in/omar-alabaseery)  
+- **LinkedIn:** [linkedin.com/in/omar-alabaseery](https://www.linkedin.com/in/omar-alabaseery-0113a11bb/)  
 - **GitHub:** [github.com/omaralabaseery](https://github.com/omaralabaseery)
 
 ### ⚡ Fun fact
