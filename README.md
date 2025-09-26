@@ -1,85 +1,50 @@
 ## Hi there 👋  
-I'm **Omar Alabaseery**, a **Full-Stack Software Engineer** & **CTO** with expertise in system architecture and AI integration from Egypt.
+I'm **Omar Alabaseery**, a **Full-Stack Software Engineer** & **Architectural Designer** from Egypt.
 
-### 🔭 Current Roles
-- **Chief Technology Officer** at Dyar Hajer Digital Solutions (Part-time, Sep 2025 - Present)
-- **Senior Software Development Engineer** at Dyar Hajer Digital Solutions (Full-time, Jul 2025 - Present)
-- **Software Engineer Project Lead** (May 2024 - Jun 2025)
+### 🔭 I’m currently working on
+- A **full administrative dashboard** for an engineering consultancy  
+  using **Spring Boot**, **Angular**, **AWS**, **Docker**, and **AI Agents**.
 
-### 🌱 Currently Working On
-- A **full administrative dashboard** for an engineering consultancy using **Spring Boot**, **Angular**, **AWS**, **Docker**, and **AI Agents**
-- **System Architecture & Security Design** for enterprise applications
-- **AI agent integration** and workflow automation with **n8n**
+### 🌱 I’m currently learning
+- Advanced **system architecture & microservices** patterns  
+- **AI agent integration** and workflow automation with **n8n**.
 
-### 💼 Professional Experience
+### 👯 I’m looking to collaborate on
+- Full-stack web applications  
+- AI-powered automation projects  
+- Cloud deployment on **AWS**.
 
-**Recent Positions:**
-- **Back End Developer** at Agouza Rehabilitation & Rheumatology Center (May 2024 - Sep 2025)
-- **Back End Developer** at Egyptian Armed Forces (Part-time, Apr 2024 - Jun 2024)
-- **Back End Developer Intern** at Zain Kuwait (Jan 2019 - Jun 2019)
-- **Back End Developer** at Al Ahli Bank of Kuwait (Part-time, Jan 2019 - Mar 2019)
+### 💬 Ask me about
+- **Java & Spring Boot**, **Angular**, **PostgreSQL**  
+- **DevOps** (Docker, CI/CD, AWS)  
+- Architectural design & 3D visualization.
 
-### 🛠️ Technical Skills
-
-**Backend Technologies:**
-- **Java Ecosystem:** Spring Boot, Spring MVC, Spring Security, Spring Webflow, Hibernate, JWT
-- **APIs:** REST APIs, RESTful WebServices
-- **Databases:** PostgreSQL, Redis, Database Design
-- **Architecture:** System Architecture, System Development, Systems Design, Security System Design
-
-**Frontend & Mobile:**
-- **Frameworks:** Angular, ASP.NET, Android
-- **Web Development:** Java Web Toolkit (JWT), Web Development
-
-**DevOps & Cloud:**
-- **Cloud:** Amazon Web Services (AWS)
-- **Networking:** Local Area Network (LAN), CCNA
-- **Tools:** Docker, GNU Make, N8N, NetBeans
-
-**AI & Machine Learning:**
-- Artificial Intelligence (AI), Machine Learning, AI Agent Integration
-
-**Project Management:**
-- ERP Software, System Migration, Project Management, SDLC
-
-### 📜 Certifications & Licenses
-
-- **PMP® Certification Training Course** - EYouth (Aug 2025)
-- **AI & Data Science - Microsoft Machine Learning Engineer** - Digital Egypt Pioneers Initiative (May 2025)
-- **AI & Machine Learning** - The British University in Egypt (Jan 2025)
-- **International Artificial Intelligence Certificate** - Zewail City of Science and Technology (Jul 2023)
-- **Angular Framework Certificate** - AITB (Jun 2023)
-- **CCNA (Cisco Certified Network Associate)** - CLS Learning Solutions (Mar 2019 - Jul 2019)
-
-### 🎓 Education
-
-- **Master of Computer Applications (MCA)** - University of Cincinnati (Jul 2019 - Aug 2023)
-- **Bachelor's degree in Computer Science** - Future University in Egypt (2019 - 2023)
-
-### 🌟 Soft Skills
-- Problem Solving, Teamwork, Project Management, Self Learning, Self Study, Design, Marketing, English
-
-### 👯 Looking to Collaborate On
-- Full-stack web applications with complex system architecture
-- AI-powered automation projects and workflow systems
-- Cloud deployment solutions on **AWS**
-- Enterprise resource planning (ERP) software development
-
-### 💬 Ask Me About
-- **Java & Spring Boot** ecosystem and enterprise application development
-- **System Architecture** design and security implementation
-- **AI integration** in business workflows and automation
-- **Cloud deployment** strategies and DevOps practices
-- **Database design** and optimization techniques
-
-### 📫 How to Reach Me
+### 📫 How to reach me
 - Email: **omar.alabaseery@gmail.com**  
 - LinkedIn: [linkedin.com/in/omar-alabaseery](https://www.linkedin.com/in/omar-alabaseery)  
 - GitHub: [github.com/omaralabaseery](https://github.com/omaralabaseery)
 
-### ⚡ Fun Fact
-Before becoming a full-stack developer and CTO, I served in the Egyptian Armed Forces and gained extensive experience in secure system design. My background in **military service** combined with **enterprise software development** gives me a unique perspective on building robust, secure, and scalable systems.
+### ⚡ Fun fact
+Before becoming a full-stack developer, I spent years designing **sustainable commercial projects** and 3D visualizations—  
+a unique mix of **architecture + software engineering** that shapes how I build scalable systems today.
+<h1 align="center">Hi 👋, I'm Omar Alabaseery</h1>
+<h3 align="center">Full-Stack Software Engineer& Architectural Designer from Egypt.</h3>
 
----
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=omaralabaseery&label=Profile%20views&color=0e75b6&style=flat" alt="omaralabaseery" /> </p>
 
-*"Combining architectural thinking with software engineering to build systems that are both elegant and functional."*
+<p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=omaralabaseery" alt="omaralabaseery" /></a> </p>
+
+- 🔭 I’m currently working on **A **full administrative dashboard** for an engineering consultancy using **Spring Boot**, **Angular**, **AWS**, **Docker**, and **AI Agents**.**
+
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+</p>
+
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40"/> </a> <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="angular" width="40" height="40"/> </a> <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original-wordmark.svg" alt="angularjs" width="40" height="40"/> </a> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://d3js.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/d3js/d3js-original.svg" alt="d3js" width="40" height="40"/> </a> <a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40"/> </a> <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> <a href="https://cloud.google.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg" alt="gcp" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.jenkins.io" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mathworks.com/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png" alt="matlab" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg" alt="nginx" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.oracle.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" alt="oracle" width="40" height="40"/> </a> <a href="https://pandas.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg" alt="pandas" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://pytorch.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" alt="pytorch" width="40" height="40"/> </a> <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original-wordmark.svg" alt="redis" width="40" height="40"/> </a> <a href="https://scikit-learn.org/" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="scikit_learn" width="40" height="40"/> </a> <a href="https://seaborn.pydata.org/" target="_blank" rel="noreferrer"> <img src="https://seaborn.pydata.org/_images/logo-mark-lightbg.svg" alt="seaborn" width="40" height="40"/> </a> <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="40" height="40"/> </a> <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/> </a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> </p>
+
+<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=omaralabaseery&show_icons=true&locale=en&layout=compact" alt="omaralabaseery" /></p>
+
+<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=omaralabaseery&show_icons=true&locale=en" alt="omaralabaseery" /></p>
+
+<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=omaralabaseery&theme=dark" alt="omaralabaseery" /></p>
