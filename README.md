@@ -1,16 +1,29 @@
-## Hi there 👋
+## Hi there 👋  
+I'm **Omar Alabaseery**, a **Full-Stack Software Engineer** & **Architectural Designer** from Egypt.
 
-<!--
-**omaralabaseery/omaralabaseery** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+### 🔭 I’m currently working on
+- A **full administrative dashboard** for an engineering consultancy  
+  using **Spring Boot**, **Angular**, **AWS**, **Docker**, and **AI Agents**.
 
-Here are some ideas to get you started:
+### 🌱 I’m currently learning
+- Advanced **system architecture & microservices** patterns  
+- **AI agent integration** and workflow automation with **n8n**.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 👯 I’m looking to collaborate on
+- Full-stack web applications  
+- AI-powered automation projects  
+- Cloud deployment on **AWS**.
+
+### 💬 Ask me about
+- **Java & Spring Boot**, **Angular**, **PostgreSQL**  
+- **DevOps** (Docker, CI/CD, AWS)  
+- Architectural design & 3D visualization.
+
+### 📫 How to reach me
+- Email: **omar.alabaseery@gmail.com**  
+- LinkedIn: [linkedin.com/in/omaralabaseery](https://www.linkedin.com/in/omaralabaseery)  
+- GitHub: [github.com/omaralabaseery](https://github.com/omaralabaseery)
+
+### ⚡ Fun fact
+Before becoming a full-stack developer, I spent years designing **sustainable commercial projects** and 3D visualizations—  
+a unique mix of **architecture + software engineering** that shapes how I build scalable systems today.
