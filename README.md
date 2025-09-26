@@ -26,7 +26,7 @@ I combine a strong background in **software engineering** and **architecture** t
 - Architectural design & 3D visualization
 
 ### 📫 How to reach me
-- **Email:** omar.alabaseery@gmail.com  
+- **Email:** omaralabaseery81@gmail.com  
 - **LinkedIn:** [linkedin.com/in/omar-alabaseery](https://www.linkedin.com/in/omar-alabaseery-0113a11bb/)  
 - **GitHub:** [github.com/omaralabaseery](https://github.com/omaralabaseery)
 
