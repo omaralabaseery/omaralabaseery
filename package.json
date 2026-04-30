@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run build:all && node dist/server.js",
     "dev": "ng serve",
     "build": "ng build",
+    "build:all": "ng build && npx tsc server.ts --target es2020 --module commonjs --resolveJsonModule --esModuleInterop --outDir dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
