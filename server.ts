@@ -87,8 +87,13 @@ Keep responses concise.`,
 });
 
 // Serve Angular app for all other routes
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'dist/app/browser/index.html'));
+app.use((req: Request, res: Response) => {
+  const indexPath = path.join(__dirname, 'app/browser/index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ error: 'Not found' });
+  }
 });
 
 app.listen(PORT, () => {
