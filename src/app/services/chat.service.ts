@@ -3,9 +3,6 @@ import { isPlatformBrowser } from '@angular/common';
 
 console.log('[Neural System] Core Build Date: 2026-02-25 19:40');
 
-// Claude API Key - Direct Usage
-const CLAUDE_API_KEY = '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';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -75,9 +72,9 @@ export class ChatService {
 
   private initializeAI() {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Direct Claude)...');
+      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Local Server)...');
       try {
-        console.log('[Neural Interface] Direct API integration ready. Logic online.');
+        console.log('[Neural Interface] Server-side integration ready. Logic online.');
       } catch (e) {
         console.error('[Neural Interface] Initialization error:', e);
       }
@@ -101,19 +98,14 @@ export class ChatService {
 
   async sendMessage(message: string): Promise<string> {
     try {
-      // Direct Claude API call
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      // Call local server endpoint
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': CLAUDE_API_KEY,
-          'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          model: 'claude-3-5-sonnet-20241022',
-          max_tokens: 1024,
-          system: this.systemInstruction,
-          messages: [{ role: 'user', content: message }],
+          message: message,
         }),
       });
 
@@ -123,7 +115,7 @@ export class ChatService {
       }
 
       const data: any = await response.json();
-      const outputText = data.content?.[0]?.text;
+      const outputText = data.message;
 
       if (outputText) {
         return outputText;
@@ -131,7 +123,7 @@ export class ChatService {
 
       return "I received an empty response. Neural channels might be saturated.";
     } catch (error: any) {
-      console.error('Error communicating with Claude:', error);
+      console.error('Error communicating with server:', error);
       const errorMsg = error?.message || 'Unknown neural connection error';
       return `[Connection Anomaly]: ${errorMsg}. Please verify network status is stable. (Code: 503-NEURAL)`;
     }
