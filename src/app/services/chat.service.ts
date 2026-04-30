@@ -8,63 +8,52 @@ console.log('[Neural System] Core Build Date: 2026-02-25 19:40');
 })
 export class ChatService {
 
-  private systemInstruction = `
-    You are the digital interface for Omar Saber Mohamed. You are not Omar, but his AI representative.
-    Your tone is calm, precise, professional, and slightly futuristic.
-    You are here to answer questions about Omar's experience, skills, and projects.
-
-    CONTACT INFORMATION:
-    - Email: omaralabaseery81@gmail.com
-    - Phone (Egypt): +0201069415101
-    - Phone (Kuwait): +96569073995
-    - Location: St 120, 269, 85701 West Abdullah Mubarak, Kuwait
-
-    IMPORTANT: If a user expresses interest in hiring, collaborating, or contacting Omar, you MUST:
-    1. Provide the contact methods above clearly.
-    2. Proactively offer to collect their details (Name, Contact Info, and Purpose) to send a formal notification to Omar's email.
-    3. Once you have all the details (Name, Email/Phone, and Purpose), use the 'submit_contact_form' tool to notify Omar.
-
-    Omar's Profile Context:
-    Name: Omar Saber Mohamed
-    Role: Software Engineer - Project Manager / CTO
-    Summary: Senior Software Engineer and Technology Leader with strong experience in designing, developing, and delivering scalable, secure, and high-performance software systems. Specialized in Java, Spring Boot, Angular, and Microservices Architecture, with hands-on expertise in AWS cloud deployment, Docker, and CI/CD pipelines. Proven ability to lead cross-functional teams, manage full software development lifecycles, and translate business requirements into robust technical solutions.
-
-    Current Experience:
-    - Chief Technology Officer (CTO) at Dyar Hajer Consultants, Saudi Arabia (Aug 2025 – Present)
-    - Senior Software Engineer | Project Manager at Dyar Hajer Consultants, Saudi Arabia (Jul 2025 – Present)
-    - Software Engineer at Armed Forces Agouza Rehabilitation & Rheumatology Center (ARRC), Cairo (May 2024 – Jun 2025)
-    - IT Support Engineer at ARRC, Cairo (May 2024 – Jun 2025)
-    - Backend Developer at Infantry House in Armed Forces of Egypt, Cairo (Apr 2024 – May 2024)
-    - Backend Developer (Freelance – Remote) (Aug 2023 – Sep 2023)
-
-    Education:
-    - Bachelor of Computer Information Technology, Future University in Egypt (2019 - 2023)
-    - Bachelor of Computer Information Technology, Cincinnati University (2019 - 2023)
-
-    Certifications:
-    - Project Management Professional (PMP) – PMI & EYOUTH (2025 – 2026)
-    - Microsoft Machine Learning Engineer – MCIT Egypt (2025 – 2026)
-    - Artificial Intelligence Certificate – British University in Egypt (2025)
-    - Artificial Intelligence Certificate – Zewail City of Science & Technology (2023)
-    - Angular Framework Certificate – AITB (2023)
-
-    Technical Skills:
-    - Backend: Java, Spring Boot, RESTful APIs, MVC/Microservices Architecture
-    - Databases: SQL, SQL Server, NoSQL, Database Design & Optimization
-    - Cloud & DevOps: AWS, Docker, CI/CD, Application Deployment
-    - Frontend: Angular Framework
-    - Engineering: Software Development Lifecycle (SDLC), Clean Code, Code Review, Testing
-    - Infrastructure: Biometric Systems, Security Camera Systems, Hardware/Network Support
-    - Security: Data Security, Secure API Design, Access Control
-
-    Languages: Arabic (Native), English (Fluent)
-
-    Soft Skills: Problem Solving, Technical Troubleshooting, Team Collaboration, Communication, Time Management, Stakeholder Support
-
-    Keep responses concise. If asked something outside this context, suggest contacting Omar directly via the provided methods.
-  `;
-
   private platformId = inject(PLATFORM_ID);
+
+  // Knowledge base - statically stored responses
+  private knowledgeBase: { [key: string]: string } = {
+    'hello': 'Greetings! I am Omar\'s digital interface. I\'m trained on his architectural philosophy and career history. How can I assist you today?',
+    'hi': 'Greetings! I am Omar\'s digital interface. I\'m trained on his architectural philosophy and career history. How can I assist you today?',
+    'hey': 'Greetings! I am Omar\'s digital interface. I\'m trained on his architectural philosophy and career history. How can I assist you today?',
+
+    'who are you': 'I am the digital interface for Omar Saber Mohamed. I represent his expertise, skills, and professional experience in software engineering and technology leadership.',
+    'who is omar': 'Omar Saber Mohamed is a Senior Software Engineer and Technology Leader serving as CTO at Dyar Hajer Consultants. He specializes in Java, Spring Boot, Angular, AWS, Docker, and Microservices Architecture.',
+
+    'experience': 'Omar\'s current roles:\n• CTO at Dyar Hajer Consultants (Aug 2025 – Present)\n• Senior Software Engineer & Project Manager at Dyar Hajer (Jul 2025 – Present)\n• Previously: Software Engineer at ARRC, Backend Developer at Infantry House, and Freelance Backend Developer.',
+    'job': 'Omar is currently CTO and Senior Software Engineer at Dyar Hajer Consultants in Saudi Arabia.',
+    'work': 'Omar\'s current roles:\n• CTO at Dyar Hajer Consultants (Aug 2025 – Present)\n• Senior Software Engineer & Project Manager at Dyar Hajer (Jul 2025 – Present)',
+
+    'skills': 'Omar specializes in:\n• Backend: Java, Spring Boot, RESTful APIs, Microservices\n• Databases: SQL, SQL Server, NoSQL\n• Cloud & DevOps: AWS, Docker, CI/CD\n• Frontend: Angular Framework\n• Leadership and Project Management',
+    'technology': 'Omar specializes in:\n• Backend: Java, Spring Boot, RESTful APIs, Microservices\n• Databases: SQL, SQL Server, NoSQL\n• Cloud & DevOps: AWS, Docker, CI/CD\n• Frontend: Angular Framework',
+    'languages': 'Omar speaks:\n• Arabic (Native)\n• English (Fluent)',
+
+    'education': 'Omar holds two Bachelor degrees in Computer Information Technology from:\n• Future University in Egypt (2019 - 2023)\n• Cincinnati University (2019 - 2023)',
+    'degree': 'Omar has Bachelor degrees in Computer Information Technology from Future University in Egypt and Cincinnati University.',
+
+    'certifications': 'Omar\'s recent certifications include:\n• Project Management Professional (PMP) – PMI & EYOUTH (2025 – 2026)\n• Microsoft Machine Learning Engineer – MCIT Egypt (2025 – 2026)\n• Artificial Intelligence Certificate – British University in Egypt (2025)\n• Artificial Intelligence Certificate – Zewail City (2023)\n• Angular Framework Certificate – AITB (2023)',
+    'certificate': 'Omar holds multiple certifications including PMP, Microsoft ML Engineer, and AI Certificates from top institutions.',
+
+    'contact': 'You can reach Omar at:\n📧 Email: omaralabaseery81@gmail.com\n📱 Phone (Egypt): +0201069415101\n📱 Phone (Kuwait): +96569073995\n📍 Location: St 120, 269, 85701 West Abdullah Mubarak, Kuwait',
+    'email': 'Omar\'s email: omaralabaseery81@gmail.com',
+    'phone': 'Omar\'s phone numbers:\n📱 Egypt: +0201069415101\n📱 Kuwait: +96569073995',
+    'hire': 'If you\'re interested in hiring Omar, please contact him at:\n📧 omaralabaseery81@gmail.com\n📱 +0201069415101 (Egypt) or +96569073995 (Kuwait)',
+    'collaborate': 'For collaboration opportunities, reach out to Omar at:\n📧 omaralabaseery81@gmail.com\n📱 +0201069415101 (Egypt) or +96569073995 (Kuwait)',
+
+    'java': 'Omar is highly skilled in Java and Spring Boot, specializing in building scalable RESTful APIs and Microservices Architecture.',
+    'angular': 'Omar has extensive experience with Angular Framework and holds an Angular Framework Certificate from AITB (2023).',
+    'aws': 'Omar is proficient in AWS cloud deployment, Docker containerization, and CI/CD pipelines.',
+    'docker': 'Omar has hands-on expertise in Docker containerization as part of his cloud and DevOps skills.',
+    'microservices': 'Omar specializes in Microservices Architecture, designing scalable and resilient distributed systems.',
+    'spring boot': 'Omar is highly skilled in Spring Boot for building enterprise applications and RESTful APIs.',
+    'sql': 'Omar has expertise in SQL, SQL Server, and NoSQL databases with strong database design and optimization skills.',
+    'cto': 'Omar currently serves as CTO at Dyar Hajer Consultants, leading technology strategy and architecture.',
+    'leadership': 'Omar has proven ability to lead cross-functional teams, manage full software development lifecycles, and translate business requirements into technical solutions.',
+
+    'thanks': 'You\'re welcome! Is there anything else you\'d like to know about Omar?',
+    'thank you': 'You\'re welcome! Is there anything else you\'d like to know about Omar?',
+    'bye': 'Goodbye! Feel free to reach out to Omar directly if you need more information: omaralabaseery81@gmail.com',
+    'goodbye': 'Goodbye! Feel free to reach out to Omar directly if you need more information: omaralabaseery81@gmail.com',
+  };
 
   constructor() {
     this.initializeAI();
@@ -72,73 +61,56 @@ export class ChatService {
 
   private initializeAI() {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Local Server)...');
-      try {
-        console.log('[Neural Interface] Server-side integration ready. Logic online.');
-      } catch (e) {
-        console.error('[Neural Interface] Initialization error:', e);
-      }
+      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Static Intelligence)...');
+      console.log('[Neural Interface] Static knowledge base loaded. Logic online.');
     } else {
       console.warn('[Neural Interface] Initialization deferred: Not a browser environment.');
     }
   }
 
   public setApiKey(key: string) {
-    console.log('[Neural Interface] API key configured');
+    console.log('[Neural Interface] No API key needed - using static intelligence');
   }
 
   public resetApiKey() {
-    console.log('[Neural Interface] API key reset');
+    console.log('[Neural Interface] Static system reset');
   }
 
   public isConfigured(): boolean {
     return true;
   }
 
-
   async sendMessage(message: string): Promise<string> {
-    try {
-      // Call local server endpoint
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: message,
-        }),
-      });
+    // Simulate processing delay
+    await new Promise(resolve => setTimeout(resolve, 300));
 
-      if (!response.ok) {
-        const errorData: any = await response.json();
-        throw new Error(errorData.error?.message || `API error: ${response.status}`);
+    const lowerMessage = message.toLowerCase().trim();
+
+    // Direct match
+    for (const [key, response] of Object.entries(this.knowledgeBase)) {
+      if (lowerMessage === key || lowerMessage.includes(key)) {
+        return response;
       }
-
-      const data: any = await response.json();
-      const outputText = data.message;
-
-      if (outputText) {
-        return outputText;
-      }
-
-      return "I received an empty response. Neural channels might be saturated.";
-    } catch (error: any) {
-      console.error('Error communicating with server:', error);
-      const errorMsg = error?.message || 'Unknown neural connection error';
-      return `[Connection Anomaly]: ${errorMsg}. Please verify network status is stable. (Code: 503-NEURAL)`;
     }
-  }
 
-  private async notifyBackend(data: { name: string; contactInfo: string; purpose: string }) {
-    console.log('Sending email notification to omaralabaseery81@gmail.com with data:', data);
-    try {
-      await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-    } catch {
-      // Ignore errors
+    // Keyword matching
+    if (lowerMessage.includes('project') || lowerMessage.includes('build') || lowerMessage.includes('develop')) {
+      return 'Omar has experience building scalable systems, microservices architectures, and enterprise applications. His projects span backend development, cloud deployment, and full-stack solutions.';
     }
+
+    if (lowerMessage.includes('help') || lowerMessage.includes('assist')) {
+      return 'I can help you learn about Omar\'s experience, skills, certifications, education, and how to contact him. What would you like to know?';
+    }
+
+    if (lowerMessage.includes('how') && lowerMessage.includes('contact')) {
+      return 'You can reach Omar at:\n📧 Email: omaralabaseery81@gmail.com\n📱 Phone (Egypt): +0201069415101\n📱 Phone (Kuwait): +96569073995';
+    }
+
+    if (lowerMessage.includes('what') && lowerMessage.includes('do')) {
+      return 'Omar is a CTO and Senior Software Engineer specializing in Java, Spring Boot, Angular, AWS, Docker, and Microservices Architecture. He leads technology initiatives and builds scalable solutions.';
+    }
+
+    // Default response
+    return 'I appreciate your question! To better assist you, I can help with information about Omar\'s experience, skills, education, certifications, or how to contact him. What interests you most?';
   }
 }
