@@ -21,14 +21,13 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none pb-6">
+    <div class="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
       <!-- Chat Window -->
       <div
         #chatWindow
-        class="w-[95vw] md:w-[600px] pointer-events-auto bg-black/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transform origin-bottom scale-0 opacity-0 transition-all duration-500 ease-out mb-4"
+        class="w-[95vw] md:w-[600px] pointer-events-auto bg-black/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transform scale-0 opacity-0 transition-all duration-500 ease-out"
         [class.scale-100]="isOpen()"
         [class.opacity-100]="isOpen()"
-        [class.-translate-y-2]="isOpen()"
       >
         <!-- Messages -->
         <div
@@ -93,8 +92,8 @@ interface Message {
         </div>
       </div>
 
-      <!-- Dock Bar -->
-      <div class="pointer-events-auto px-4">
+      <!-- Dock Bar (Fixed Bottom) -->
+      <div class="fixed bottom-6 left-1/2 -translate-x-1/2 pointer-events-auto z-40">
         <div class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-full px-6 py-3 flex items-center justify-between gap-4 shadow-lg">
           <div class="flex-1">
             <p class="text-white/70 text-sm">{{ isOpen() ? 'Chat open' : 'What are you working on?' }}</p>
