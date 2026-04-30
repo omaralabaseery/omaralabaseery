@@ -21,140 +21,93 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div
-      class="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center pointer-events-none"
-    >
+    <div class="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none pb-6">
       <!-- Chat Window -->
       <div
         #chatWindow
-        class="mb-4 w-[90vw] md:w-[450px] pointer-events-auto bg-[#0a0a0a]/95 backdrop-blur-3xl border border-white/10 rounded-[40px] shadow-2xl overflow-hidden transform origin-bottom scale-0 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+        class="w-[95vw] md:w-[600px] pointer-events-auto bg-black/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden transform origin-bottom scale-0 opacity-0 transition-all duration-500 ease-out mb-4"
         [class.scale-100]="isOpen()"
         [class.opacity-100]="isOpen()"
-        [class.-translate-y-4]="isOpen()"
+        [class.-translate-y-2]="isOpen()"
       >
-        <!-- Header -->
-        <div
-          class="p-6 border-b border-white/5 flex justify-between items-center bg-white/5"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="w-2.5 h-2.5 rounded-full bg-secondary shadow-[0_0_15px_rgba(0,107,63,0.8)] animate-pulse"
-            ></div>
-            <div class="flex flex-col">
-              <span
-                class="font-display font-black text-[10px] text-white uppercase tracking-[0.2em]"
-                >My Assistance</span
-              >
-              <span
-                class="text-[8px] font-mono uppercase tracking-widest text-gray-500"
-                >System v4.0 — Online</span
-              >
-            </div>
-          </div>
-          <button
-            (click)="toggleChat()"
-            class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 hover:text-white hover:bg-white/10 transition-all"
-          >
-            <span class="material-icons text-sm">close</span>
-          </button>
-        </div>
-
         <!-- Messages -->
         <div
           #messagesContainer
-          class="h-[450px] overflow-y-auto p-8 space-y-8 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+          class="h-[400px] overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
         >
           @for (msg of messages(); track msg.timestamp) {
             <div
-              class="flex flex-col gap-3 max-w-[85%]"
+              class="flex flex-col gap-2 max-w-[85%]"
               [class.self-end]="msg.sender === 'user'"
               [class.self-start]="msg.sender === 'ai'"
               [class.items-end]="msg.sender === 'user'"
               [class.items-start]="msg.sender === 'ai'"
             >
               <div
-                class="p-5 rounded-[24px] text-sm leading-relaxed font-sans shadow-xl"
-                [class.bg-white]="msg.sender === 'user'"
+                class="px-4 py-3 rounded-2xl text-sm leading-relaxed"
+                [class.bg-white/80]="msg.sender === 'user'"
                 [class.text-black]="msg.sender === 'user'"
                 [class.rounded-br-none]="msg.sender === 'user'"
-                [class.bg-white/5]="msg.sender === 'ai'"
-                [class.text-white/80]="msg.sender === 'ai'"
+                [class.bg-white/10]="msg.sender === 'ai'"
+                [class.text-white/90]="msg.sender === 'ai'"
                 [class.border]="msg.sender === 'ai'"
-                [class.border-white/10]="msg.sender === 'ai'"
+                [class.border-white/20]="msg.sender === 'ai'"
                 [class.rounded-bl-none]="msg.sender === 'ai'"
               >
                 {{ msg.text }}
               </div>
-              <span
-                class="text-[8px] text-gray-600 font-mono uppercase tracking-[0.2em] px-2"
-                >{{ msg.timestamp | date: "shortTime" }}</span
-              >
             </div>
           }
 
           @if (isTyping()) {
-            <div
-              class="flex gap-3 items-center p-4 bg-white/5 rounded-2xl border border-white/5 text-secondary text-[9px] font-mono uppercase tracking-widest animate-pulse max-w-fit"
-            >
-              <span
-                class="w-1.5 h-1.5 bg-secondary rounded-full animate-ping"
-              ></span>
-              <span>Processing...</span>
+            <div class="flex gap-2 items-center text-white/60 text-sm">
+              <span class="w-2 h-2 bg-white/60 rounded-full animate-bounce"></span>
+              <span class="w-2 h-2 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+              <span class="w-2 h-2 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
             </div>
           }
         </div>
 
         <!-- Input -->
-        <div class="p-6 border-t border-white/5 bg-black/60 backdrop-blur-xl">
+        <div class="p-4 border-t border-white/5 bg-white/5 backdrop-blur-xl">
           <form
             (ngSubmit)="sendMessage()"
-            class="flex gap-4 p-2 bg-white/5 rounded-2xl border border-white/10 focus-within:border-secondary transition-colors"
+            class="flex gap-3 items-center"
           >
             <input
               [(ngModel)]="userInput"
               name="userInput"
               type="text"
-              placeholder="Type a query..."
-              class="flex-1 bg-transparent border-none outline-none text-sm text-white placeholder-gray-700 font-mono focus:ring-0 px-2"
+              placeholder="Ask anything..."
+              class="flex-1 bg-white/10 border border-white/10 rounded-full px-5 py-3 text-sm text-white placeholder-white/50 outline-none focus:border-white/30 transition-all"
               autocomplete="off"
             />
             <button
               type="submit"
               [disabled]="!userInput.trim() || isTyping()"
-              class="w-10 h-10 rounded-xl bg-secondary text-white disabled:opacity-20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center shadow-[0_5px_15px_rgba(0,107,63,0.3)]"
+              class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white disabled:opacity-30 transition-all flex items-center justify-center"
             >
-              <span class="material-icons text-xl">north_east</span>
+              <span class="material-icons text-lg">send</span>
             </button>
           </form>
         </div>
       </div>
 
-      <!-- Toggle Button -->
-      <div class="relative pb-8 pointer-events-auto">
-        <div
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-20 bg-secondary/20 blur-[60px] opacity-40 rounded-full animate-pulse transition-opacity duration-1000"
-          [class.opacity-0]="isOpen()"
-        ></div>
-
-        <button
-          (click)="toggleChat()"
-          class="group relative w-20 h-20 rounded-full bg-secondary border border-white/10 flex items-center justify-center hover:bg-black transition-all duration-700 hover:scale-110 shadow-[0_20px_50px_rgba(0,64,36,0.4)] overflow-hidden"
-        >
-          <div
-            class="absolute inset-x-0 bottom-0 h-0 bg-black group-hover:h-full transition-all duration-700"
-          ></div>
-
-          <span
-            class="material-icons text-white transition-all duration-700 text-3xl relative z-10"
-            [class.rotate-180]="isOpen()"
-          >
-            {{ isOpen() ? "keyboard_arrow_down" : "bolt" }}
-          </span>
-
-          <div
-            class="absolute inset-1 rounded-full border border-dashed border-white/10 group-hover:border-white/20 transition-all animate-spin-slow"
-          ></div>
-        </button>
+      <!-- Dock Bar -->
+      <div class="pointer-events-auto px-4">
+        <div class="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-full px-6 py-3 flex items-center justify-between gap-4 shadow-lg">
+          <div class="flex-1">
+            <p class="text-white/70 text-sm">{{ isOpen() ? 'Chat open' : 'What are you working on?' }}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              (click)="toggleChat()"
+              class="text-white/70 hover:text-white transition-colors"
+            >
+              <span class="material-icons text-xl">{{ isOpen() ? 'expand_less' : 'expand_more' }}</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   `,
