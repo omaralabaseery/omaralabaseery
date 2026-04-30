@@ -1,5 +1,4 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
-import { GoogleGenAI, Type } from '@google/genai';
 import { isPlatformBrowser } from '@angular/common';
 
 console.log('[Neural System] Core Build Date: 2026-02-25 19:40');
@@ -8,39 +7,59 @@ console.log('[Neural System] Core Build Date: 2026-02-25 19:40');
   providedIn: 'root'
 })
 export class ChatService {
-  private ai: any = null;
 
   private systemInstruction = `
-    You are the digital interface for Omar Saber Mohamed. You are not Omar, but his AI representative. 
-    Your tone is calm, precise, professional, and slightly futuristic. 
+    You are the digital interface for Omar Saber Mohamed. You are not Omar, but his AI representative.
+    Your tone is calm, precise, professional, and slightly futuristic.
     You are here to answer questions about Omar's experience, skills, and projects.
-    
+
     CONTACT INFORMATION:
-    - Email: omar.saber.abdo.mohamed@gmail.com
-    - WhatsApp (Egypt): +201069415101
-    - WhatsApp (Kuwait): +96569073995
-    
+    - Email: omaralabaseery81@gmail.com
+    - Phone (Egypt): +0201069415101
+    - Phone (Kuwait): +96569073995
+    - Location: St 120, 269, 85701 West Abdullah Mubarak, Kuwait
+
     IMPORTANT: If a user expresses interest in hiring, collaborating, or contacting Omar, you MUST:
     1. Provide the contact methods above clearly.
     2. Proactively offer to collect their details (Name, Contact Info, and Purpose) to send a formal notification to Omar's email.
     3. Once you have all the details (Name, Email/Phone, and Purpose), use the 'submit_contact_form' tool to notify Omar.
-    
+
     Omar's Profile Context:
     Name: Omar Saber Mohamed
     Role: Software Engineer - Project Manager / CTO
-    Summary: Senior Software Engineer and Technology Leader with strong experience in designing, developing, and delivering scalable, secure, and high-performance software systems. Specialized in Java, Spring Boot, Angular, and Microservices Architecture, with hands-on expertise in AWS cloud deployment, Docker, and CI/CD pipelines.
-    
-    Experience:
-    - CTO at Dyar Hajer Consultants (Aug 2025 – Present)
-    - Senior Software Engineer | Project Manager at Dyar Hajer Consultants (Jul 2025 – Present)
-    - Software Engineer at ARRC (May 2024 – Jun 2025)
-    - IT Support Engineer at ARRC (May 2024 – Jun 2025)
-    - Backend Developer at Infantry House (Apr 2024 – May 2024)
-    
+    Summary: Senior Software Engineer and Technology Leader with strong experience in designing, developing, and delivering scalable, secure, and high-performance software systems. Specialized in Java, Spring Boot, Angular, and Microservices Architecture, with hands-on expertise in AWS cloud deployment, Docker, and CI/CD pipelines. Proven ability to lead cross-functional teams, manage full software development lifecycles, and translate business requirements into robust technical solutions.
+
+    Current Experience:
+    - Chief Technology Officer (CTO) at Dyar Hajer Consultants, Saudi Arabia (Aug 2025 – Present)
+    - Senior Software Engineer | Project Manager at Dyar Hajer Consultants, Saudi Arabia (Jul 2025 – Present)
+    - Software Engineer at Armed Forces Agouza Rehabilitation & Rheumatology Center (ARRC), Cairo (May 2024 – Jun 2025)
+    - IT Support Engineer at ARRC, Cairo (May 2024 – Jun 2025)
+    - Backend Developer at Infantry House in Armed Forces of Egypt, Cairo (Apr 2024 – May 2024)
+    - Backend Developer (Freelance – Remote) (Aug 2023 – Sep 2023)
+
     Education:
-    - Bachelor of Computer Information Technology, Future University in Egypt / Cincinnati University (2019 - 2023).
-    
-    Skills: Java, Spring Boot, Angular, AWS, Docker, CI/CD, Microservices, Leadership.
+    - Bachelor of Computer Information Technology, Future University in Egypt (2019 - 2023)
+    - Bachelor of Computer Information Technology, Cincinnati University (2019 - 2023)
+
+    Certifications:
+    - Project Management Professional (PMP) – PMI & EYOUTH (2025 – 2026)
+    - Microsoft Machine Learning Engineer – MCIT Egypt (2025 – 2026)
+    - Artificial Intelligence Certificate – British University in Egypt (2025)
+    - Artificial Intelligence Certificate – Zewail City of Science & Technology (2023)
+    - Angular Framework Certificate – AITB (2023)
+
+    Technical Skills:
+    - Backend: Java, Spring Boot, RESTful APIs, MVC/Microservices Architecture
+    - Databases: SQL, SQL Server, NoSQL, Database Design & Optimization
+    - Cloud & DevOps: AWS, Docker, CI/CD, Application Deployment
+    - Frontend: Angular Framework
+    - Engineering: Software Development Lifecycle (SDLC), Clean Code, Code Review, Testing
+    - Infrastructure: Biometric Systems, Security Camera Systems, Hardware/Network Support
+    - Security: Data Security, Secure API Design, Access Control
+
+    Languages: Arabic (Native), English (Fluent)
+
+    Soft Skills: Problem Solving, Technical Troubleshooting, Team Collaboration, Communication, Time Management, Stakeholder Support
 
     Keep responses concise. If asked something outside this context, suggest contacting Omar directly via the provided methods.
   `;
@@ -53,26 +72,9 @@ export class ChatService {
 
   private initializeAI() {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('[Neural Interface] Initializing cognitive architecture (v2.1)...');
+      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Backend Integration)...');
       try {
-        let apiKey = localStorage.getItem('GEMINI_API_KEY');
-        
-        // Check global constant from build config if localStorage is empty
-        if (!apiKey || apiKey === 'undefined' || apiKey === 'null' || apiKey === '') {
-          if (typeof GEMINI_API_KEY !== 'undefined' && GEMINI_API_KEY && GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY') {
-            apiKey = GEMINI_API_KEY;
-          }
-        }
-
-        if (apiKey && apiKey !== 'undefined' && apiKey !== 'null' && apiKey !== '') {
-          console.log('[Neural Interface] Using configured API key.');
-          this.ai = new GoogleGenAI({ apiKey });
-        } else {
-          console.log('[Neural Interface] Using default fallback key.');
-          const fallbackKey = 'AIzaSyDM37o3U5wqn4DQHK7DyL0ha6Mu3zRSb4Q';
-          this.ai = new GoogleGenAI({ apiKey: fallbackKey });
-        }
-        console.log('[Neural Interface] Configuration successful. Logic online.');
+        console.log('[Neural Interface] Secure backend integration ready. Logic online.');
       } catch (e) {
         console.error('[Neural Interface] Initialization error:', e);
       }
@@ -82,91 +84,63 @@ export class ChatService {
   }
 
   public setApiKey(key: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('GEMINI_API_KEY', key);
-      this.initializeAI();
-    }
+    // No longer needed - backend handles API key securely
+    console.log('[Neural Interface] API key configuration handled by backend');
   }
 
   public resetApiKey() {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('GEMINI_API_KEY');
-      this.ai = null;
-      this.initializeAI();
-    }
+    // No longer needed - backend handles API key securely
+    console.log('[Neural Interface] Backend maintains persistent API key');
   }
 
   public isConfigured(): boolean {
-    if (!this.ai && isPlatformBrowser(this.platformId)) {
-      this.initializeAI();
-    }
-    return this.ai !== null;
+    return true; // Always configured through backend
   }
 
 
   async sendMessage(message: string): Promise<string> {
-    if (!this.ai && isPlatformBrowser(this.platformId)) {
-      this.initializeAI();
-    }
-
-    if (!this.ai) {
-      return "The system is currently in restricted mode. Please ensure the GEMINI_API_KEY is correctly configured in your environment to enable the AI interface.";
-    }
     try {
-      const response = await this.ai.models.generateContent({
-        model: 'gemini-1.5-flash',
-        contents: [{ role: 'user', parts: [{ text: message }] }],
-        config: {
-          systemInstruction: this.systemInstruction,
-          tools: [{
-            functionDeclarations: [{
-              name: 'submit_contact_form',
-              description: 'Submits the user contact details to Omar Saber Mohamed via email notification.',
-              parameters: {
-                type: Type.OBJECT,
-                properties: {
-                  name: { type: Type.STRING, description: 'The name of the person contacting Omar.' },
-                  contactInfo: { type: Type.STRING, description: 'The email or phone number of the person.' },
-                  purpose: { type: Type.STRING, description: 'The reason for contacting Omar.' }
-                },
-                required: ['name', 'contactInfo', 'purpose']
-              }
-            }]
-          }]
-        }
+      // Call backend endpoint (Netlify Functions)
+      const response = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: message,
+        }),
       });
 
-      const functionCalls = response.functionCalls;
-      if (functionCalls && functionCalls.length > 0) {
-        const call = functionCalls[0];
-        if (call.name === 'submit_contact_form') {
-          const args = call.args as { name: string; contactInfo: string; purpose: string };
-          console.log('Submitting contact form:', args);
-          // Simulate backend call
-          await this.notifyBackend(args);
-          return `System notification dispatched. I have successfully transmitted your details (Name: ${args.name}) to Omar's secure terminal. He will review your request and respond via ${args.contactInfo} as soon as possible. Is there anything else I can assist you with?`;
-        }
+      if (!response.ok) {
+        const errorData: any = await response.json();
+        throw new Error(errorData.error?.message || `API error: ${response.status}`);
       }
 
-      const outputText = response.candidates?.[0]?.content?.parts?.[0]?.text;
-      return outputText || "I received an empty response. Neural channels might be saturated.";
+      const data: any = await response.json();
+      const outputText = data.message;
+
+      if (outputText) {
+        return outputText;
+      }
+
+      return "I received an empty response. Neural channels might be saturated.";
     } catch (error: any) {
-      console.error('Error communicating with AI:', error);
+      console.error('Error communicating with backend:', error);
       const errorMsg = error?.message || 'Unknown neural connection error';
-      return `[Connection Anomaly]: ${errorMsg}. Please verify your API key and network status. (Code: 503-NEURAL)`;
+      return `[Connection Anomaly]: ${errorMsg}. Please verify network status is stable. (Code: 503-NEURAL)`;
     }
   }
 
   private async notifyBackend(data: { name: string; contactInfo: string; purpose: string }) {
-    console.log('Sending email notification to omar.saber.abdo.mohamed@gmail.com with data:', data);
+    console.log('Sending email notification to omaralabaseery81@gmail.com with data:', data);
     try {
-      await fetch('/api/contact', {
+      await fetch('/.netlify/functions/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
     } catch {
-      // Ignore errors in frontend-only mode
+      // Ignore errors in secure backend mode
     }
   }
 }
