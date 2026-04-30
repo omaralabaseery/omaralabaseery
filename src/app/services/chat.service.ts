@@ -3,6 +3,9 @@ import { isPlatformBrowser } from '@angular/common';
 
 console.log('[Neural System] Core Build Date: 2026-02-25 19:40');
 
+// Claude API Key - Direct Usage
+const CLAUDE_API_KEY = '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';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -72,9 +75,9 @@ export class ChatService {
 
   private initializeAI() {
     if (isPlatformBrowser(this.platformId)) {
-      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Backend Integration)...');
+      console.log('[Neural Interface] Initializing cognitive architecture (v4.0 - Direct Claude)...');
       try {
-        console.log('[Neural Interface] Secure backend integration ready. Logic online.');
+        console.log('[Neural Interface] Direct API integration ready. Logic online.');
       } catch (e) {
         console.error('[Neural Interface] Initialization error:', e);
       }
@@ -84,30 +87,33 @@ export class ChatService {
   }
 
   public setApiKey(key: string) {
-    // No longer needed - backend handles API key securely
-    console.log('[Neural Interface] API key configuration handled by backend');
+    console.log('[Neural Interface] API key configured');
   }
 
   public resetApiKey() {
-    // No longer needed - backend handles API key securely
-    console.log('[Neural Interface] Backend maintains persistent API key');
+    console.log('[Neural Interface] API key reset');
   }
 
   public isConfigured(): boolean {
-    return true; // Always configured through backend
+    return true;
   }
 
 
   async sendMessage(message: string): Promise<string> {
     try {
-      // Call backend endpoint (Netlify Functions)
-      const response = await fetch('/.netlify/functions/chat', {
+      // Direct Claude API call
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-api-key': CLAUDE_API_KEY,
+          'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          message: message,
+          model: 'claude-3-5-sonnet-20241022',
+          max_tokens: 1024,
+          system: this.systemInstruction,
+          messages: [{ role: 'user', content: message }],
         }),
       });
 
@@ -117,7 +123,7 @@ export class ChatService {
       }
 
       const data: any = await response.json();
-      const outputText = data.message;
+      const outputText = data.content?.[0]?.text;
 
       if (outputText) {
         return outputText;
@@ -125,7 +131,7 @@ export class ChatService {
 
       return "I received an empty response. Neural channels might be saturated.";
     } catch (error: any) {
-      console.error('Error communicating with backend:', error);
+      console.error('Error communicating with Claude:', error);
       const errorMsg = error?.message || 'Unknown neural connection error';
       return `[Connection Anomaly]: ${errorMsg}. Please verify network status is stable. (Code: 503-NEURAL)`;
     }
@@ -134,13 +140,13 @@ export class ChatService {
   private async notifyBackend(data: { name: string; contactInfo: string; purpose: string }) {
     console.log('Sending email notification to omaralabaseery81@gmail.com with data:', data);
     try {
-      await fetch('/.netlify/functions/contact', {
+      await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
     } catch {
-      // Ignore errors in secure backend mode
+      // Ignore errors
     }
   }
 }
