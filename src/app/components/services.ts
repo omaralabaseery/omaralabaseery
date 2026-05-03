@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="py-32 px-4 md:px-20 bg-secondary relative overflow-hidden">
+    <section class="py-32 px-4 md:px-20 bg-[var(--color-bg-dark)] relative overflow-hidden">
       <!-- Background Accents -->
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       <div class="absolute inset-0 opacity-[0.02] pointer-events-none" 

@@ -9,12 +9,12 @@ import { RouterLink } from "@angular/router";
   imports: [CommonModule, RouterLink],
   template: `
     <div
-      class="min-h-screen bg-white text-black font-sans p-8 md:p-24 selection:bg-secondary/10 selection:text-secondary"
+      class="min-h-screen bg-white text-black font-sans p-8 md:p-24 selection:bg-[var(--color-blue)]/10 selection:text-[var(--color-blue)]"
     >
       <!-- Back Button -->
       <a
         routerLink="/"
-        class="inline-flex items-center gap-2 text-gray-400 hover:text-secondary transition-colors mb-16 group"
+        class="inline-flex items-center gap-2 text-gray-400 hover:text-[var(--color-blue)] transition-colors mb-16 group"
       >
         <span
           class="material-icons text-sm group-hover:-translate-x-1 transition-transform"
@@ -28,7 +28,7 @@ import { RouterLink } from "@angular/router";
       <div class="max-w-4xl mx-auto">
         <!-- New Professional Header Frame -->
         <header
-          class="mb-16 bg-[#f9fafb] p-12 rounded-[48px] border border-gray-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.03)] selection:bg-secondary/20 transition-all duration-700 hover:shadow-2xl"
+          class="mb-16 bg-[#f9fafb] p-12 rounded-[48px] border border-gray-100 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.03)] selection:bg-[var(--color-blue)]/20 transition-all duration-700 hover:shadow-2xl"
         >
           <div
             class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-12"
@@ -41,7 +41,7 @@ import { RouterLink } from "@angular/router";
                   Omar Saber
                 </h1>
                 <h1
-                  class="font-display text-6xl md:text-7xl font-black uppercase tracking-tighter text-secondary leading-[0.85]"
+                  class="font-display text-6xl md:text-7xl font-black uppercase tracking-tighter text-[var(--color-blue)] leading-[0.85]"
                 >
                   Mohamed
                 </h1>
@@ -57,52 +57,52 @@ import { RouterLink } from "@angular/router";
               class="flex flex-col gap-3 items-start md:items-end w-full md:w-auto"
             >
               <div
-                class="flex items-center gap-3 text-gray-500 hover:text-secondary transition-colors group cursor-default"
+                class="flex items-center gap-3 text-gray-500 hover:text-[var(--color-blue)] transition-colors group cursor-default"
               >
                 <span
                   class="text-[10px] font-mono uppercase tracking-widest text-right"
                   >omar.saber.abdo.mohamed&#64;gmail.com</span
                 >
                 <span
-                  class="material-icons text-lg text-gray-400 group-hover:text-secondary"
+                  class="material-icons text-lg text-gray-400 group-hover:text-[var(--color-blue)]"
                   >mail</span
                 >
               </div>
               <div
-                class="flex items-center gap-3 text-gray-500 hover:text-secondary transition-colors group cursor-default"
+                class="flex items-center gap-3 text-gray-500 hover:text-[var(--color-blue)] transition-colors group cursor-default"
               >
                 <span
                   class="text-[10px] font-mono uppercase tracking-widest text-right"
                   >+20 106 941 5101</span
                 >
                 <span
-                  class="material-icons text-lg text-gray-400 group-hover:text-secondary"
+                  class="material-icons text-lg text-gray-400 group-hover:text-[var(--color-blue)]"
                   >phone</span
                 >
               </div>
               <div
-                class="flex items-center gap-3 text-gray-500 hover:text-secondary transition-colors group cursor-default"
+                class="flex items-center gap-3 text-gray-500 hover:text-[var(--color-blue)] transition-colors group cursor-default"
               >
                 <span
                   class="text-[10px] font-mono uppercase tracking-widest text-right"
                   >+965 690 73995</span
                 >
                 <span
-                  class="material-icons text-lg text-gray-400 group-hover:text-secondary"
+                  class="material-icons text-lg text-gray-400 group-hover:text-[var(--color-blue)]"
                   >phone</span
                 >
               </div>
               <a
                 href="https://www.linkedin.com/in/omaralabaseery"
                 target="_blank"
-                class="flex items-center gap-3 text-gray-500 hover:text-secondary transition-colors group cursor-pointer"
+                class="flex items-center gap-3 text-gray-500 hover:text-[var(--color-blue)] transition-colors group cursor-pointer"
               >
                 <span
                   class="text-[10px] font-mono uppercase tracking-widest text-right"
                   >linkedin.com/in/omaralabaseery</span
                 >
                 <svg
-                  class="w-[18px] h-[18px] text-gray-400 group-hover:text-secondary transition-colors"
+                  class="w-[18px] h-[18px] text-gray-400 group-hover:text-[var(--color-blue)] transition-colors"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -121,9 +121,9 @@ import { RouterLink } from "@angular/router";
           <div class="pt-8 border-t border-black/[0.03] flex gap-12">
             <div class="flex items-center gap-3 group cursor-default">
               <div
-                class="w-8 h-8 rounded-lg bg-secondary/5 flex items-center justify-center group-hover:bg-secondary/10 transition-colors"
+                class="w-8 h-8 rounded-lg bg-[var(--color-blue)]/5 flex items-center justify-center group-hover:bg-[var(--color-blue)]/10 transition-colors"
               >
-                <span class="material-icons text-sm text-secondary"
+                <span class="material-icons text-sm text-[var(--color-blue)]"
                   >psychology</span
                 >
               </div>
@@ -134,9 +134,9 @@ import { RouterLink } from "@angular/router";
             </div>
             <div class="flex items-center gap-3 group cursor-default">
               <div
-                class="w-8 h-8 rounded-lg bg-secondary/5 flex items-center justify-center group-hover:bg-secondary/10 transition-colors"
+                class="w-8 h-8 rounded-lg bg-[var(--color-blue)]/5 flex items-center justify-center group-hover:bg-[var(--color-blue)]/10 transition-colors"
               >
-                <span class="material-icons text-sm text-secondary"
+                <span class="material-icons text-sm text-[var(--color-blue)]"
                   >person</span
                 >
               </div>
@@ -150,7 +150,7 @@ import { RouterLink } from "@angular/router";
 
         <div class="mb-20 px-4">
           <p
-            class="text-sm text-gray-500 leading-relaxed font-sans italic border-l-2 border-secondary/10 pl-6"
+            class="text-sm text-gray-500 leading-relaxed font-sans italic border-l-2 border-[var(--color-blue)]/10 pl-6"
           >
             Senior Software Engineer and Technology Leader with strong
             experience in designing, developing, and delivering scalable,
@@ -165,7 +165,7 @@ import { RouterLink } from "@angular/router";
           <div class="space-y-12">
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-8 border-b border-black/5 pb-2"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-8 border-b border-black/5 pb-2"
               >
                 Technical Engine
               </h3>
@@ -180,7 +180,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.backend; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -196,7 +196,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.data; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -212,7 +212,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.ops; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -228,7 +228,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.engineering; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -244,7 +244,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.security; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -260,7 +260,7 @@ import { RouterLink } from "@angular/router";
                   <div class="flex flex-wrap gap-1.5">
                     @for (s of skills.it; track s) {
                       <span
-                        class="px-2 py-0.5 bg-secondary/5 text-secondary text-[9px] font-mono border border-secondary/10 rounded uppercase"
+                        class="px-2 py-0.5 bg-[var(--color-blue)]/5 text-[var(--color-blue)] text-[9px] font-mono border border-[var(--color-blue)]/10 rounded uppercase"
                         >{{ s }}</span
                       >
                     }
@@ -271,7 +271,7 @@ import { RouterLink } from "@angular/router";
 
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-8 border-b border-black/5 pb-2"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-8 border-b border-black/5 pb-2"
               >
                 Academic Foundations
               </h3>
@@ -287,7 +287,7 @@ import { RouterLink } from "@angular/router";
                     Major in Computer Science
                   </p>
                   <p
-                    class="text-[10px] font-mono text-secondary mt-1 tracking-widest"
+                    class="text-[10px] font-mono text-[var(--color-blue)] mt-1 tracking-widest"
                   >
                     GPA: 2.16 / 4.00 (SEPT 2023)
                   </p>
@@ -305,7 +305,7 @@ import { RouterLink } from "@angular/router";
 
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-8 border-b border-black/5 pb-2"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-8 border-b border-black/5 pb-2"
               >
                 Soft Skills
               </h3>
@@ -314,7 +314,7 @@ import { RouterLink } from "@angular/router";
                   <li
                     class="flex items-center gap-2 text-[10px] font-mono text-gray-500 uppercase tracking-widest"
                   >
-                    <span class="w-1 h-1 bg-secondary/40 rounded-full"></span>
+                    <span class="w-1 h-1 bg-[var(--color-blue)]/40 rounded-full"></span>
                     {{ s }}
                   </li>
                 }
@@ -323,7 +323,7 @@ import { RouterLink } from "@angular/router";
 
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-4 border-b border-black/5 pb-2"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-4 border-b border-black/5 pb-2"
               >
                 Languages
               </h3>
@@ -344,7 +344,7 @@ import { RouterLink } from "@angular/router";
           <div class="md:col-span-2 space-y-20">
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-10 border-b border-black/5 pb-4"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-10 border-b border-black/5 pb-4"
               >
                 Career Architecture
               </h3>
@@ -363,7 +363,7 @@ import { RouterLink } from "@angular/router";
                         >{{ job.period }}</span
                       >
                       <span
-                        class="text-[9px] font-mono text-secondary uppercase bg-secondary/5 px-2 py-0.5 rounded border border-secondary/10"
+                        class="text-[9px] font-mono text-[var(--color-blue)] uppercase bg-[var(--color-blue)]/5 px-2 py-0.5 rounded border border-[var(--color-blue)]/10"
                         >{{ job.location }}</span
                       >
                     </div>
@@ -373,7 +373,7 @@ import { RouterLink } from "@angular/router";
                       {{ job.role }}
                     </h4>
                     <p
-                      class="text-secondary font-display font-bold text-xs uppercase tracking-widest mb-6"
+                      class="text-[var(--color-blue)] font-display font-bold text-xs uppercase tracking-widest mb-6"
                     >
                       {{ job.company }}
                     </p>
@@ -383,7 +383,7 @@ import { RouterLink } from "@angular/router";
                           class="text-[13px] text-gray-600 leading-relaxed flex gap-3"
                         >
                           <span
-                            class="text-secondary/30 text-xs mt-0.5 shrink-0"
+                            class="text-[var(--color-blue)]/30 text-xs mt-0.5 shrink-0"
                             >•</span
                           >
                           {{ desc }}
@@ -397,18 +397,18 @@ import { RouterLink } from "@angular/router";
 
             <div>
               <h3
-                class="text-xs font-bold uppercase tracking-widest text-secondary mb-10 border-b border-black/5 pb-4"
+                class="text-xs font-bold uppercase tracking-widest text-[var(--color-blue)] mb-10 border-b border-black/5 pb-4"
               >
                 Global Certifications
               </h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @for (cert of certs; track cert.name) {
                   <div
-                    class="p-6 rounded-2xl bg-secondary/[0.02] border border-secondary/5 hover:border-secondary/20 transition-all group"
+                    class="p-6 rounded-2xl bg-[var(--color-blue)]/[0.02] border border-[var(--color-blue)]/5 hover:border-[var(--color-blue)]/20 transition-all group"
                   >
                     <div class="flex items-start justify-between mb-4">
                       <span
-                        class="material-icons text-secondary text-xl group-hover:scale-110 transition-transform"
+                        class="material-icons text-[var(--color-blue)] text-xl group-hover:scale-110 transition-transform"
                         >verified</span
                       >
                       <span
