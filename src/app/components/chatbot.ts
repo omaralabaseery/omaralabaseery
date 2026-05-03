@@ -21,11 +21,11 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="fixed bottom-0 right-0 z-50 flex items-end justify-end pointer-events-none">
-      <!-- Chat Window (Slides up from bottom) -->
+    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex items-end justify-center pointer-events-none w-full">
+      <!-- Chat Window (Slides up from bottom, centered) -->
       <div
         #chatWindow
-        class="w-full md:w-[500px] h-[600px] md:h-[700px] pointer-events-auto bg-black/40 backdrop-blur-2xl border-t border-white/10 rounded-t-3xl shadow-2xl overflow-hidden transform translate-y-full opacity-0 transition-all duration-500 ease-out mr-4 mb-20"
+        class="w-[95vw] md:w-[500px] h-[600px] md:h-[700px] pointer-events-auto bg-black/40 backdrop-blur-2xl border-t border-white/10 rounded-t-3xl shadow-2xl overflow-hidden transform translate-y-full opacity-0 transition-all duration-500 ease-out"
         [class.translate-y-0]="isOpen()"
         [class.opacity-100]="isOpen()"
       >
@@ -92,10 +92,10 @@ interface Message {
         </div>
       </div>
 
-      <!-- Floating Chat Widget Button -->
+      <!-- Floating Chat Widget Button (Centered Bottom) -->
       <button
         (click)="toggleChat()"
-        class="fixed bottom-8 right-8 pointer-events-auto z-40 flex items-center justify-center"
+        class="fixed left-1/2 -translate-x-1/2 bottom-[15%] pointer-events-auto z-40 flex items-center justify-center"
         [class.hidden]="isOpen()"
       >
         <div class="relative group">
@@ -109,7 +109,7 @@ interface Message {
       <!-- Close Button (Only visible when open) -->
       <button
         (click)="toggleChat()"
-        class="fixed bottom-8 right-8 pointer-events-auto z-[51] w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all"
+        class="fixed left-1/2 -translate-x-1/2 bottom-[15%] pointer-events-auto z-[51] w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all"
         [class.hidden]="!isOpen()"
       >
         <span class="material-icons text-white text-xl">close</span>
