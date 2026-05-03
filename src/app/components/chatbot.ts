@@ -21,19 +21,19 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <!-- Chat Bar (Always visible at bottom) -->
-    <div class="fixed bottom-0 left-0 right-0 z-50 border-t border-white/20 bg-black/60 backdrop-blur-xl">
-      <!-- Messages Container (Expands when open) -->
+    <!-- Floating Chat Widget -->
+    <div class="fixed right-1/4 top-1/3 z-50 w-96 flex flex-col gap-3">
+      <!-- Messages Container (Expands upward when open) -->
       <div
         #messagesContainer
-        class="max-w-7xl mx-auto px-4 py-4 overflow-y-auto transition-all duration-500"
-        [style.maxHeight]="isOpen() ? '300px' : '0px'"
+        class="overflow-y-auto transition-all duration-500 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/20"
+        [style.maxHeight]="isOpen() ? '350px' : '0px'"
         [style.display]="isOpen() ? 'block' : 'none'"
       >
-        <div class="space-y-4 pb-4">
+        <div class="px-4 py-4 space-y-4">
           @for (msg of messages(); track msg.timestamp) {
             <div
-              class="flex flex-col gap-2 max-w-sm"
+              class="flex flex-col gap-2 max-w-xs"
               [class.ml-auto]="msg.sender === 'user'"
               [class.items-end]="msg.sender === 'user'"
               [class.items-start]="msg.sender === 'ai'"
@@ -62,8 +62,8 @@ interface Message {
         </div>
       </div>
 
-      <!-- Input Bar -->
-      <div class="max-w-7xl mx-auto px-4 py-3">
+      <!-- Input Bar (Always visible) -->
+      <div>
         <form
           (ngSubmit)="sendMessage()"
           class="flex gap-2 items-center bg-white/20 rounded-full px-4 py-3 border border-white/30 hover:border-white/50 focus-within:border-[var(--color-blue)] transition-all"
