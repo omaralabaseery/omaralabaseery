@@ -22,7 +22,7 @@ interface Message {
   imports: [CommonModule, FormsModule],
   template: `
     <!-- Chat Bar (Always visible at bottom) -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-white/5 backdrop-blur-xl">
+    <div class="fixed bottom-0 left-0 right-0 z-50 border-t border-white/20 bg-black/60 backdrop-blur-xl">
       <!-- Messages Container (Expands when open) -->
       <div
         #messagesContainer
@@ -66,7 +66,7 @@ interface Message {
       <div class="max-w-7xl mx-auto px-4 py-3">
         <form
           (ngSubmit)="sendMessage()"
-          class="flex gap-2 items-center bg-white/10 rounded-full px-4 py-3 border border-white/20 hover:border-white/40 focus-within:border-[var(--color-blue)]/50 transition-all"
+          class="flex gap-2 items-center bg-white/20 rounded-full px-4 py-3 border border-white/30 hover:border-white/50 focus-within:border-[var(--color-blue)] transition-all"
         >
           <!-- Toggle Messages Button -->
           <button
