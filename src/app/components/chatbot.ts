@@ -21,37 +21,31 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex items-end justify-center pointer-events-none w-full">
-      <!-- Chat Window (Slides up from bottom, centered) -->
+    <!-- Chat Bar (Always visible at bottom) -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-white/5 backdrop-blur-xl">
+      <!-- Messages Container (Expands when open) -->
       <div
-        #chatWindow
-        class="w-[95vw] md:w-[500px] h-[600px] md:h-[700px] pointer-events-auto bg-black/40 backdrop-blur-2xl border-t border-white/10 rounded-t-3xl shadow-2xl overflow-hidden transform translate-y-full opacity-0 transition-all duration-500 ease-out"
-        [class.translate-y-0]="isOpen()"
-        [class.opacity-100]="isOpen()"
+        #messagesContainer
+        class="max-w-7xl mx-auto px-4 py-4 overflow-y-auto transition-all duration-500"
+        [style.maxHeight]="isOpen() ? '300px' : '0px'"
+        [style.display]="isOpen() ? 'block' : 'none'"
       >
-        <!-- Messages -->
-        <div
-          #messagesContainer
-          class="h-[400px] overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
-        >
+        <div class="space-y-4 pb-4">
           @for (msg of messages(); track msg.timestamp) {
             <div
-              class="flex flex-col gap-2 max-w-[85%]"
-              [class.self-end]="msg.sender === 'user'"
-              [class.self-start]="msg.sender === 'ai'"
+              class="flex flex-col gap-2 max-w-sm"
+              [class.ml-auto]="msg.sender === 'user'"
               [class.items-end]="msg.sender === 'user'"
               [class.items-start]="msg.sender === 'ai'"
             >
               <div
-                class="px-4 py-3 rounded-2xl text-sm leading-relaxed"
-                [class.bg-white/80]="msg.sender === 'user'"
-                [class.text-black]="msg.sender === 'user'"
-                [class.rounded-br-none]="msg.sender === 'user'"
+                class="px-4 py-2 rounded-lg text-sm leading-relaxed"
+                [class.bg-[var(--color-blue)]]="msg.sender === 'user'"
+                [class.text-white]="msg.sender === 'user'"
                 [class.bg-white/10]="msg.sender === 'ai'"
                 [class.text-white/90]="msg.sender === 'ai'"
                 [class.border]="msg.sender === 'ai'"
                 [class.border-white/20]="msg.sender === 'ai'"
-                [class.rounded-bl-none]="msg.sender === 'ai'"
               >
                 {{ msg.text }}
               </div>
@@ -66,71 +60,57 @@ interface Message {
             </div>
           }
         </div>
-
-        <!-- Input (ChatGPT Style) -->
-        <div class="p-4 border-t border-white/10 bg-white/5 backdrop-blur-xl">
-          <form
-            (ngSubmit)="sendMessage()"
-            class="flex gap-2 items-center bg-white/10 rounded-full px-4 py-3 border border-white/20 hover:border-white/40 focus-within:border-[var(--color-blue)]/50 transition-all"
-          >
-            <!-- Left Action Buttons -->
-            <button type="button" class="text-white/40 hover:text-white transition-colors">
-              <span class="material-icons text-lg">add</span>
-            </button>
-            <button type="button" class="text-white/40 hover:text-white transition-colors">
-              <span class="material-icons text-lg">public</span>
-            </button>
-            <button type="button" class="text-white/40 hover:text-white transition-colors">
-              <span class="material-icons text-lg">tune</span>
-            </button>
-
-            <!-- Input Field -->
-            <input
-              [(ngModel)]="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask anything..."
-              class="flex-1 bg-transparent text-sm text-white placeholder-white/40 outline-none"
-              autocomplete="off"
-            />
-
-            <!-- Right Action Buttons -->
-            <button type="button" class="text-white/40 hover:text-white transition-colors">
-              <span class="material-icons text-lg">mic</span>
-            </button>
-            <button
-              type="submit"
-              [disabled]="!userInput.trim() || isTyping()"
-              class="w-8 h-8 rounded-full bg-[var(--color-blue)] hover:bg-[#0052a3] text-white disabled:opacity-30 transition-all flex items-center justify-center shrink-0"
-            >
-              <span class="material-icons text-sm">arrow_upward</span>
-            </button>
-          </form>
-        </div>
       </div>
 
-      <!-- Floating Chat Widget Button (Centered Bottom) -->
-      <button
-        (click)="toggleChat()"
-        class="fixed left-1/2 -translate-x-1/2 bottom-[15%] pointer-events-auto z-40 flex items-center justify-center"
-        [class.hidden]="isOpen()"
-      >
-        <div class="relative group">
-          <div class="absolute inset-0 bg-[var(--color-blue)] rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
-          <div class="relative w-16 h-16 bg-[var(--color-blue)] rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-110">
-            <span class="material-icons text-white text-2xl">chat_bubble</span>
-          </div>
-        </div>
-      </button>
+      <!-- Input Bar -->
+      <div class="max-w-7xl mx-auto px-4 py-3">
+        <form
+          (ngSubmit)="sendMessage()"
+          class="flex gap-2 items-center bg-white/10 rounded-full px-4 py-3 border border-white/20 hover:border-white/40 focus-within:border-[var(--color-blue)]/50 transition-all"
+        >
+          <!-- Toggle Messages Button -->
+          <button
+            type="button"
+            (click)="toggleChat()"
+            class="text-white/40 hover:text-white transition-colors"
+          >
+            <span class="material-icons text-lg">{{ isOpen() ? 'expand_more' : 'expand_less' }}</span>
+          </button>
 
-      <!-- Close Button (Only visible when open) -->
-      <button
-        (click)="toggleChat()"
-        class="fixed left-1/2 -translate-x-1/2 bottom-[15%] pointer-events-auto z-[51] w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all"
-        [class.hidden]="!isOpen()"
-      >
-        <span class="material-icons text-white text-xl">close</span>
-      </button>
+          <!-- Left Action Buttons -->
+          <button type="button" class="text-white/40 hover:text-white transition-colors">
+            <span class="material-icons text-lg">add</span>
+          </button>
+          <button type="button" class="text-white/40 hover:text-white transition-colors">
+            <span class="material-icons text-lg">public</span>
+          </button>
+          <button type="button" class="text-white/40 hover:text-white transition-colors">
+            <span class="material-icons text-lg">tune</span>
+          </button>
+
+          <!-- Input Field -->
+          <input
+            [(ngModel)]="userInput"
+            name="userInput"
+            type="text"
+            placeholder="Ask anything..."
+            class="flex-1 bg-transparent text-sm text-white placeholder-white/40 outline-none"
+            autocomplete="off"
+          />
+
+          <!-- Right Action Buttons -->
+          <button type="button" class="text-white/40 hover:text-white transition-colors">
+            <span class="material-icons text-lg">mic</span>
+          </button>
+          <button
+            type="submit"
+            [disabled]="!userInput.trim() || isTyping()"
+            class="w-8 h-8 rounded-full bg-[var(--color-blue)] hover:bg-[#0052a3] text-white disabled:opacity-30 transition-all flex items-center justify-center shrink-0"
+          >
+            <span class="material-icons text-sm">arrow_upward</span>
+          </button>
+        </form>
+      </div>
     </div>
   `,
   styles: [
@@ -138,22 +118,10 @@ interface Message {
       :host {
         display: block;
       }
-      @keyframes spin-slow {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      .animate-spin-slow {
-        animation: spin-slow 15s linear infinite;
-      }
     `,
   ],
 })
 export class ChatbotComponent {
-  @ViewChild("chatWindow") chatWindow!: ElementRef;
   @ViewChild("messagesContainer") messagesContainer!: ElementRef;
 
   private chatService = inject(ChatService);
