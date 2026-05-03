@@ -5,6 +5,8 @@ import {
   signal,
   inject,
   PLATFORM_ID,
+  AfterViewInit,
+  OnDestroy,
 } from "@angular/core";
 import { CommonModule, isPlatformBrowser } from "@angular/common";
 import { FormsModule } from "@angular/forms";
@@ -21,12 +23,17 @@ interface Message {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <!-- Floating Chat Widget -->
-    <div class="fixed right-1/4 top-1/3 z-50 w-96 flex flex-col gap-3">
+    <!-- Floating Chat Widget (Centered) -->
+    <div class="fixed left-1/2 transform -translate-x-1/2 top-1/3 z-50 w-96 flex flex-col gap-3">
       <!-- Messages Container (Expands upward when open) -->
       <div
         #messagesContainer
-        class="overflow-y-auto transition-all duration-500 rounded-2xl bg-black/70 backdrop-blur-xl border border-white/20"
+        class="overflow-y-auto transition-all duration-500 rounded-2xl backdrop-blur-xl"
+        [class.bg-black/80]="isDarkBackground()"
+        [class.border-white/30]="isDarkBackground()"
+        [class.bg-white/70]="!isDarkBackground()"
+        [class.border-black/20]="!isDarkBackground()"
+        [class.border]="true"
         [style.maxHeight]="isOpen() ? '350px' : '0px'"
         [style.display]="isOpen() ? 'block' : 'none'"
       >
@@ -41,11 +48,15 @@ interface Message {
               <div
                 class="px-4 py-2 rounded-lg text-sm leading-relaxed"
                 [class.bg-[var(--color-blue)]]="msg.sender === 'user'"
-                [class.text-white]="msg.sender === 'user'"
-                [class.bg-white/10]="msg.sender === 'ai'"
-                [class.text-white/90]="msg.sender === 'ai'"
+                [class.text-white]="msg.sender === 'user' && isDarkBackground()"
+                [class.text-black]="msg.sender === 'user' && !isDarkBackground()"
+                [class.bg-white/20]="msg.sender === 'ai' && isDarkBackground()"
+                [class.text-white/90]="msg.sender === 'ai' && isDarkBackground()"
+                [class.border-white/30]="msg.sender === 'ai' && isDarkBackground()"
+                [class.bg-black/10]="msg.sender === 'ai' && !isDarkBackground()"
+                [class.text-black/80]="msg.sender === 'ai' && !isDarkBackground()"
+                [class.border-black/20]="msg.sender === 'ai' && !isDarkBackground()"
                 [class.border]="msg.sender === 'ai'"
-                [class.border-white/20]="msg.sender === 'ai'"
               >
                 {{ msg.text }}
               </div>
@@ -66,25 +77,49 @@ interface Message {
       <div>
         <form
           (ngSubmit)="sendMessage()"
-          class="flex gap-2 items-center bg-white/20 rounded-full px-4 py-3 border border-white/30 hover:border-white/50 focus-within:border-[var(--color-blue)] transition-all"
+          class="flex gap-2 items-center rounded-full px-4 py-3 transition-all"
+          [class.bg-white/25]="isDarkBackground()"
+          [class.border-white/40]="isDarkBackground()"
+          [class.hover:border-white/60]="isDarkBackground()"
+          [class.bg-black/15]="!isDarkBackground()"
+          [class.border-black/30]="!isDarkBackground()"
+          [class.hover:border-black/50]="!isDarkBackground()"
+          [class.border]="true"
+          [class.focus-within:border-[var(--color-blue)]]="true"
         >
           <!-- Toggle Messages Button -->
           <button
             type="button"
             (click)="toggleChat()"
-            class="text-white/40 hover:text-white transition-colors"
+            class="transition-colors"
+            [class.text-white/40]="isDarkBackground()"
+            [class.hover:text-white]="isDarkBackground()"
+            [class.text-black/40]="!isDarkBackground()"
+            [class.hover:text-black]="!isDarkBackground()"
           >
             <span class="material-icons text-lg">{{ isOpen() ? 'expand_more' : 'expand_less' }}</span>
           </button>
 
           <!-- Left Action Buttons -->
-          <button type="button" class="text-white/40 hover:text-white transition-colors">
+          <button type="button" class="transition-colors"
+            [class.text-white/40]="isDarkBackground()"
+            [class.hover:text-white]="isDarkBackground()"
+            [class.text-black/40]="!isDarkBackground()"
+            [class.hover:text-black]="!isDarkBackground()">
             <span class="material-icons text-lg">add</span>
           </button>
-          <button type="button" class="text-white/40 hover:text-white transition-colors">
+          <button type="button" class="transition-colors"
+            [class.text-white/40]="isDarkBackground()"
+            [class.hover:text-white]="isDarkBackground()"
+            [class.text-black/40]="!isDarkBackground()"
+            [class.hover:text-black]="!isDarkBackground()">
             <span class="material-icons text-lg">public</span>
           </button>
-          <button type="button" class="text-white/40 hover:text-white transition-colors">
+          <button type="button" class="transition-colors"
+            [class.text-white/40]="isDarkBackground()"
+            [class.hover:text-white]="isDarkBackground()"
+            [class.text-black/40]="!isDarkBackground()"
+            [class.hover:text-black]="!isDarkBackground()">
             <span class="material-icons text-lg">tune</span>
           </button>
 
@@ -94,12 +129,20 @@ interface Message {
             name="userInput"
             type="text"
             placeholder="Ask anything..."
-            class="flex-1 bg-transparent text-sm text-white placeholder-white/40 outline-none"
+            class="flex-1 bg-transparent text-sm outline-none"
+            [class.text-white]="isDarkBackground()"
+            [class.placeholder-white/40]="isDarkBackground()"
+            [class.text-black]="!isDarkBackground()"
+            [class.placeholder-black/40]="!isDarkBackground()"
             autocomplete="off"
           />
 
           <!-- Right Action Buttons -->
-          <button type="button" class="text-white/40 hover:text-white transition-colors">
+          <button type="button" class="transition-colors"
+            [class.text-white/40]="isDarkBackground()"
+            [class.hover:text-white]="isDarkBackground()"
+            [class.text-black/40]="!isDarkBackground()"
+            [class.hover:text-black]="!isDarkBackground()">
             <span class="material-icons text-lg">mic</span>
           </button>
           <button
@@ -121,7 +164,7 @@ interface Message {
     `,
   ],
 })
-export class ChatbotComponent {
+export class ChatbotComponent implements AfterViewInit, OnDestroy {
   @ViewChild("messagesContainer") messagesContainer!: ElementRef;
 
   private chatService = inject(ChatService);
@@ -130,7 +173,10 @@ export class ChatbotComponent {
 
   isOpen = signal(false);
   isTyping = signal(false);
+  isDarkBackground = signal(false);
   userInput = "";
+
+  private observerInstance: IntersectionObserver | null = null;
 
   messages = signal<Message[]>([
     {
@@ -139,6 +185,66 @@ export class ChatbotComponent {
       timestamp: new Date(),
     },
   ]);
+
+  ngAfterViewInit() {
+    if (!this.isBrowser) return;
+    this.setupBackgroundDetection();
+  }
+
+  ngOnDestroy() {
+    if (this.observerInstance) {
+      this.observerInstance.disconnect();
+    }
+  }
+
+  private setupBackgroundDetection() {
+    if (!this.isBrowser) return;
+
+    // Detect which section is at the chat widget position
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const bgColor = window.getComputedStyle(entry.target).backgroundColor;
+            // If background is dark (like #0a0a0a), set isDarkBackground to true
+            const isDark = this.isColorDark(bgColor);
+            this.isDarkBackground.set(isDark);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '0px 0px -200px 0px', // Check at the chat widget position
+      }
+    );
+
+    // Observe all main sections
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Also observe main element for white background sections
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+      observer.observe(mainElement);
+    }
+
+    this.observerInstance = observer;
+  }
+
+  private isColorDark(color: string): boolean {
+    // Check if color string indicates a dark background
+    if (!color || color === 'rgba(0, 0, 0, 0)') return false;
+
+    // Parse RGB values
+    const match = color.match(/\d+/g);
+    if (!match || match.length < 3) return false;
+
+    const [r, g, b] = match.map(Number);
+    // If average brightness is less than 128, it's dark
+    const brightness = (r + g + b) / 3;
+    return brightness < 128;
+  }
 
   toggleChat() {
     this.isOpen.set(!this.isOpen());
