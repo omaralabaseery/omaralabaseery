@@ -67,26 +67,43 @@ interface Message {
           }
         </div>
 
-        <!-- Input -->
-        <div class="p-4 border-t border-white/5 bg-white/5 backdrop-blur-xl">
+        <!-- Input (ChatGPT Style) -->
+        <div class="p-4 border-t border-white/10 bg-white/5 backdrop-blur-xl">
           <form
             (ngSubmit)="sendMessage()"
-            class="flex gap-3 items-center"
+            class="flex gap-2 items-center bg-white/10 rounded-full px-4 py-3 border border-white/20 hover:border-white/40 focus-within:border-[var(--color-blue)]/50 transition-all"
           >
+            <!-- Left Action Buttons -->
+            <button type="button" class="text-white/40 hover:text-white transition-colors">
+              <span class="material-icons text-lg">add</span>
+            </button>
+            <button type="button" class="text-white/40 hover:text-white transition-colors">
+              <span class="material-icons text-lg">public</span>
+            </button>
+            <button type="button" class="text-white/40 hover:text-white transition-colors">
+              <span class="material-icons text-lg">tune</span>
+            </button>
+
+            <!-- Input Field -->
             <input
               [(ngModel)]="userInput"
               name="userInput"
               type="text"
               placeholder="Ask anything..."
-              class="flex-1 bg-white/10 border border-white/10 rounded-full px-5 py-3 text-sm text-white placeholder-white/50 outline-none focus:border-white/30 transition-all"
+              class="flex-1 bg-transparent text-sm text-white placeholder-white/40 outline-none"
               autocomplete="off"
             />
+
+            <!-- Right Action Buttons -->
+            <button type="button" class="text-white/40 hover:text-white transition-colors">
+              <span class="material-icons text-lg">mic</span>
+            </button>
             <button
               type="submit"
               [disabled]="!userInput.trim() || isTyping()"
-              class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white disabled:opacity-30 transition-all flex items-center justify-center"
+              class="w-8 h-8 rounded-full bg-[var(--color-blue)] hover:bg-[#0052a3] text-white disabled:opacity-30 transition-all flex items-center justify-center shrink-0"
             >
-              <span class="material-icons text-lg">send</span>
+              <span class="material-icons text-sm">arrow_upward</span>
             </button>
           </form>
         </div>
