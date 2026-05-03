@@ -14,7 +14,7 @@ import { RouterLink } from "@angular/router";
       <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
         <div
           class="absolute inset-0"
-          style="background-image: radial-gradient(#004d40 1px, transparent 1px); background-size: 40px 40px;"
+          style="background-image: radial-gradient(#0066cc 1px, transparent 1px); background-size: 40px 40px;"
         ></div>
         <!-- Linear fade at bottom -->
         <div
@@ -38,13 +38,13 @@ import { RouterLink } from "@angular/router";
             <path
               [attr.d]="getBezierPath(tool)"
               fill="none"
-              stroke="#00c853"
+              stroke="#00d4ff"
               stroke-width="0.15"
               class="opacity-60"
             />
 
             <!-- Outward Data Flow (White Dots) -->
-            <circle r="0.6" fill="#004d40" opacity="0.8">
+            <circle r="0.6" fill="#0066cc" opacity="0.8">
               <animateMotion
                 [attr.path]="getForwardPath(tool)"
                 [attr.dur]="4 + (i % 3) + 's'"
@@ -54,7 +54,7 @@ import { RouterLink } from "@angular/router";
             </circle>
 
             <!-- Inward Data Flow -->
-            <circle r="0.4" fill="#00c853" opacity="0.8">
+            <circle r="0.4" fill="#00d4ff" opacity="0.8">
               <animateMotion
                 [attr.path]="getReversePath(tool)"
                 [attr.dur]="3 + (i % 2) + 's'"
@@ -69,7 +69,7 @@ import { RouterLink } from "@angular/router";
               [attr.cy]="tool.y"
               r="0.4"
               fill="#ffffff"
-              stroke="#00c853"
+              stroke="#00d4ff"
               stroke-width="0.2"
               class="opacity-80"
             />
@@ -82,14 +82,14 @@ import { RouterLink } from "@angular/router";
           style="left: 50%; top: 50%; transform: translate(-50%, -50%);"
         >
           <div
-            class="absolute inset-0 rounded-3xl bg-[#00c853]/5 animate-ping opacity-20"
+            class="absolute inset-0 rounded-3xl bg-[#0066cc]/5 animate-ping opacity-20"
           ></div>
           <span
-            class="material-icons text-[#004d40] text-3xl sm:text-4xl mb-1 relative z-10"
+            class="material-icons text-[#0066cc] text-3xl sm:text-4xl mb-1 relative z-10"
             >bolt</span
           >
           <span
-            class="font-bold text-[#004d40] tracking-[0.2em] text-xs sm:text-sm relative z-10"
+            class="font-bold text-[#0066cc] tracking-[0.2em] text-xs sm:text-sm relative z-10"
             >AI</span
           >
         </div>
@@ -107,7 +107,7 @@ import { RouterLink } from "@angular/router";
           >
             <!-- White rounded-box -->
             <div
-              class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-white/80 backdrop-blur-lg border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex items-center justify-center group hover:border-[#00c853]/50 hover:scale-110 hover:shadow-[0_8px_25px_rgba(0,200,83,0.15)] transition-all duration-300"
+              class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-white/80 backdrop-blur-lg border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex items-center justify-center group hover:border-[#00d4ff]/50 hover:scale-110 hover:shadow-[0_8px_25px_rgba(0,212,255,0.15)] transition-all duration-300"
             >
               <img
                 *ngIf="tool.img"
@@ -117,7 +117,7 @@ import { RouterLink } from "@angular/router";
               />
               <span
                 *ngIf="tool.icon"
-                class="material-icons text-gray-400 group-hover:text-[#00c853] transition-colors text-xl sm:text-2xl"
+                class="material-icons text-gray-400 group-hover:text-[#0066cc] transition-colors text-xl sm:text-2xl"
                 >{{ tool.icon }}</span
               >
             </div>
@@ -172,7 +172,7 @@ import { RouterLink } from "@angular/router";
           class="flex flex-row justify-center items-center gap-4 mt-8 lg:mt-10 mb-12"
         >
           <button
-            class="px-6 py-3 md:px-8 md:py-3 w-36 sm:w-44 text-[9px] sm:text-xs font-bold tracking-[0.15em] uppercase rounded-full bg-[#004d40] text-white hover:bg-[#00332a] transition-colors shadow-md cursor-pointer"
+            class="px-6 py-3 md:px-8 md:py-3 w-36 sm:w-44 text-[9px] sm:text-xs font-bold tracking-[0.15em] uppercase rounded-full bg-[var(--color-blue)] text-white hover:bg-[#0052a3] transition-colors shadow-md cursor-pointer"
           >
             VIEW PROJECTS
           </button>
@@ -199,7 +199,7 @@ import { RouterLink } from "@angular/router";
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
         }
         100% {
-          box-shadow: 0 8px 40px rgba(0, 200, 83, 0.15);
+          box-shadow: 0 8px 40px rgba(0, 102, 204, 0.15);
         }
       }
       .node-float {

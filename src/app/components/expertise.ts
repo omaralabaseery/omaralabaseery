@@ -6,20 +6,20 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="py-32 px-4 md:px-20 bg-[#f8f9fa] relative overflow-hidden">
+    <section class="py-32 px-4 md:px-20 bg-white relative overflow-hidden">
       <!-- Background Accents -->
-      <div class="absolute inset-0 opacity-[0.4] pointer-events-none" 
-           style="background-image: radial-gradient(circle, #004024 0.5px, transparent 0.5px); background-size: 40px 40px;">
+      <div class="absolute inset-0 opacity-[0.4] pointer-events-none"
+           style="background-image: radial-gradient(circle, #0066cc 0.5px, transparent 0.5px); background-size: 40px 40px;">
       </div>
       
       <div class="max-w-7xl mx-auto relative z-10">
         <div class="text-center mb-24">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 mb-6 font-mono text-[9px] uppercase tracking-widest text-secondary">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-blue)]/10 border border-[var(--color-blue)]/20 mb-6 font-mono text-[9px] uppercase tracking-widest text-[var(--color-blue)]">
             <span class="material-icons text-[10px]">architecture</span>
             Core Competencies
           </div>
           <h2 class="text-5xl md:text-7xl font-display font-extrabold tracking-tighter uppercase mb-2 text-black leading-none">
-            Technical <span class="text-secondary/30">Engine</span>
+            Technical <span class="text-gray-400">Engine</span>
           </h2>
           <p class="text-gray-400 font-mono text-[10px] uppercase tracking-[0.3em]">Engineering Excellence for Modern Enterprises</p>
         </div>
@@ -27,7 +27,7 @@ import { CommonModule } from '@angular/common';
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Architectural Strategy (Large Card) -->
           <div class="md:col-span-2 premium-card-white rounded-[40px] p-12 relative overflow-hidden group">
-            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-secondary/[0.03] blur-[100px] rounded-full group-hover:bg-secondary/[0.05] transition-all duration-700"></div>
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[var(--color-blue)]/[0.03] blur-[100px] rounded-full group-hover:bg-[var(--color-blue)]/[0.05] transition-all duration-700"></div>
             
             <div class="relative z-10">
               <h3 class="text-4xl font-display font-black mb-6 text-black tracking-tight leading-[0.9]">Architectural Strategy</h3>
@@ -37,7 +37,7 @@ import { CommonModule } from '@angular/common';
               
               <div class="flex flex-wrap gap-2">
                 @for (tag of ['Microservices', 'Event-Driven', 'Scalability', 'DDD', 'Cloud Native']; track tag) {
-                  <span class="px-5 py-2 rounded-full bg-gray-50 border border-gray-100 text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-secondary group-hover:border-secondary/20 transition-all">
+                  <span class="px-5 py-2 rounded-full bg-gray-50 border border-gray-100 text-[10px] font-bold uppercase tracking-widest text-gray-400 group-hover:text-[var(--color-blue)] group-hover:border-[var(--color-blue)]/20 transition-all">
                     {{ tag }}
                   </span>
                 }
@@ -47,8 +47,8 @@ import { CommonModule } from '@angular/common';
 
           <!-- Technical Leadership -->
           <div class="premium-card-white rounded-[40px] p-10 group">
-            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-secondary/5 transition-all">
-              <span class="material-icons text-gray-400 group-hover:text-secondary transition-colors text-2xl">leaderboard</span>
+            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[var(--color-blue)]/5 transition-all">
+              <span class="material-icons text-gray-400 group-hover:text-[var(--color-blue)] transition-colors text-2xl">leaderboard</span>
             </div>
             <h3 class="text-2xl font-display font-black mb-4 text-black tracking-tight leading-none">Technical Leadership</h3>
             <p class="text-gray-400 text-sm leading-relaxed">
@@ -58,8 +58,8 @@ import { CommonModule } from '@angular/common';
 
           <!-- Cloud Orchestration -->
           <div class="premium-card-white rounded-[40px] p-10 group">
-            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-secondary/5 transition-all">
-              <span class="material-icons text-gray-400 group-hover:text-secondary transition-colors text-2xl">cloud_done</span>
+            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[var(--color-blue)]/5 transition-all">
+              <span class="material-icons text-gray-400 group-hover:text-[var(--color-blue)] transition-colors text-2xl">cloud_done</span>
             </div>
             <h3 class="text-2xl font-display font-black mb-4 text-black tracking-tight leading-none">Cloud Orchestration</h3>
             <p class="text-gray-400 text-sm leading-relaxed">
@@ -69,8 +69,8 @@ import { CommonModule } from '@angular/common';
 
           <!-- System Reliability (New Extension to fill grid) -->
           <div class="premium-card-white rounded-[40px] p-10 group">
-            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-secondary/5 transition-all">
-              <span class="material-icons text-gray-400 group-hover:text-secondary transition-colors text-2xl">security</span>
+            <div class="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 group-hover:bg-[var(--color-blue)]/5 transition-all">
+              <span class="material-icons text-gray-400 group-hover:text-[var(--color-blue)] transition-colors text-2xl">security</span>
             </div>
             <h3 class="text-2xl font-display font-black mb-4 text-black tracking-tight leading-none">System Reliability</h3>
             <p class="text-gray-400 text-sm leading-relaxed">
@@ -83,8 +83,8 @@ import { CommonModule } from '@angular/common';
         <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mt-32 border-t border-black/5 pt-20">
           @for (stat of stats; track stat.label) {
             <div class="text-center group cursor-default">
-              <p class="text-5xl md:text-6xl font-display font-black text-black mb-2 tracking-tighter group-hover:text-secondary transition-colors">
-                {{ stat.value }}<span class="text-secondary/40 group-hover:text-secondary transition-all">+</span>
+              <p class="text-5xl md:text-6xl font-display font-black text-black mb-2 tracking-tighter group-hover:text-[var(--color-blue)] transition-colors">
+                {{ stat.value }}<span class="text-gray-400 group-hover:text-[var(--color-blue)] transition-all">+</span>
               </p>
               <p class="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400 group-hover:text-gray-600 transition-colors">
                 {{ stat.label }}

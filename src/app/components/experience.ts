@@ -19,7 +19,7 @@ interface Experience {
       <!-- Background Grid -->
       <div
         class="absolute inset-0 opacity-[0.05] pointer-events-none"
-        style="background-image: linear-gradient(#062617 1px, transparent 1px), linear-gradient(90deg, #062617 1px, transparent 1px); background-size: 50px 50px;"
+        style="background-image: linear-gradient(#0066cc 1px, transparent 1px), linear-gradient(90deg, #0066cc 1px, transparent 1px); background-size: 50px 50px;"
       ></div>
 
       <div class="max-w-7xl mx-auto relative z-10 w-full">
@@ -29,18 +29,18 @@ interface Experience {
         >
           <div class="max-w-2xl">
             <div
-              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#062617]/5 border border-[#062617]/10 mb-6 font-mono text-[9px] uppercase tracking-widest text-[#062617]"
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-blue)]/5 border border-[var(--color-blue)]/10 mb-6 font-mono text-[9px] uppercase tracking-widest text-[var(--color-blue)]"
             >
               <span class="material-icons text-[10px]">work_history</span>
               Professional Journey
             </div>
             <h2
-              class="text-5xl md:text-7xl font-display font-extrabold tracking-tighter uppercase mb-6 text-[#062617] leading-none"
+              class="text-5xl md:text-7xl font-display font-extrabold tracking-tighter uppercase mb-6 text-black leading-none"
             >
-              Career<br /><span class="text-[#062617]/40">History</span>
+              Career<br /><span class="text-gray-400">History</span>
             </h2>
             <p
-              class="text-[#062617]/70 font-mono text-[10px] uppercase tracking-[0.3em]"
+              class="text-gray-700 font-mono text-[10px] uppercase tracking-[0.3em]"
             >
               A chronological log of technical leadership & architectural
               impact.
@@ -48,7 +48,7 @@ interface Experience {
           </div>
           <div class="flex gap-4 mb-2">
             <div
-              class="px-6 py-2 bg-[#062617]/5 border border-[#062617]/10 rounded-full font-mono text-[9px] uppercase tracking-widest text-[#062617]"
+              class="px-6 py-2 bg-[var(--color-blue)]/5 border border-[var(--color-blue)]/10 rounded-full font-mono text-[9px] uppercase tracking-widest text-[var(--color-blue)]"
             >
               Exp: 4+ Years
             </div>
@@ -61,7 +61,7 @@ interface Experience {
             <a
               [routerLink]="['/resume']"
               [fragment]="'job-' + i"
-              class="block bg-[#052b1b] rounded-xl p-8 lg:p-10 relative overflow-hidden group transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col h-full border border-white/5 hover:border-[#6b9d7e]/60 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(107,157,126,0.3)] shadow-[0_10px_30px_-5px_rgba(0,0,0,0.3)] cursor-pointer"
+              class="block bg-white rounded-xl p-8 lg:p-10 relative overflow-hidden group transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col h-full border border-gray-200 hover:border-[var(--color-blue)]/60 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(0,102,204,0.3)] shadow-[0_10px_30px_-5px_rgba(0,0,0,0.1)] cursor-pointer"
               [ngClass]="
                 i % 4 === 0 || i % 4 === 3 ? 'lg:col-span-2' : 'lg:col-span-1'
               "
@@ -71,18 +71,18 @@ interface Experience {
                 class="flex justify-between items-start mb-10 w-full relative z-10"
               >
                 <span
-                  class="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-[#6b9d7e] font-bold"
+                  class="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-[var(--color-blue)] font-bold"
                   >{{ job.period }}</span
                 >
                 <div
-                  class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#6b9d7e]/20 group-hover:border-[#6b9d7e]/60 group-hover:shadow-[0_0_15px_rgba(107,157,126,0.5)] transition-all duration-300 shrink-0 overflow-hidden relative"
+                  class="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:bg-[var(--color-blue)]/20 group-hover:border-[var(--color-blue)]/60 group-hover:shadow-[0_0_15px_rgba(0,102,204,0.5)] transition-all duration-300 shrink-0 overflow-hidden relative"
                 >
                   <!-- Animated Arrow -->
                   <div
                     class="relative w-full h-full flex items-center justify-center"
                   >
                     <span
-                      class="material-icons text-[18px] text-[#6b9d7e] absolute transition-all duration-300 group-hover:translate-x-full group-hover:-translate-y-full opacity-100 group-hover:opacity-0"
+                      class="material-icons text-[18px] text-[var(--color-blue)] absolute transition-all duration-300 group-hover:translate-x-full group-hover:-translate-y-full opacity-100 group-hover:opacity-0"
                       >north_east</span
                     >
                     <span
@@ -95,12 +95,12 @@ interface Experience {
 
               <!-- Title & Company -->
               <h3
-                class="text-3xl md:text-[32px] font-sans lg:font-display font-extrabold mb-3 text-white tracking-tight leading-tight w-full pr-4 relative z-10"
+                class="text-3xl md:text-[32px] font-sans lg:font-display font-extrabold mb-3 text-black tracking-tight leading-tight w-full pr-4 relative z-10"
               >
                 {{ job.role }}
               </h3>
               <p
-                class="text-[#6b9d7e] font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mb-10 relative z-10"
+                class="text-[var(--color-blue)] font-mono text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mb-10 relative z-10"
               >
                 {{ job.company }}
               </p>
@@ -109,10 +109,10 @@ interface Experience {
               <ul class="space-y-4 mb-12 flex-grow relative z-10">
                 @for (desc of job.description; track desc) {
                   <li
-                    class="text-[13px] text-[#a4c2b0] flex gap-4 items-start leading-relaxed font-semibold tracking-wide"
+                    class="text-[13px] text-gray-700 flex gap-4 items-start leading-relaxed font-semibold tracking-wide"
                   >
                     <span
-                      class="w-1.5 h-1.5 rounded-full bg-[#6b9d7e] mt-2 shrink-0 transition-colors opacity-80"
+                      class="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] mt-2 shrink-0 transition-colors opacity-80"
                     ></span>
                     <span class="flex-1">{{ desc }}</span>
                   </li>
@@ -123,7 +123,7 @@ interface Experience {
               <div class="flex flex-wrap gap-3 mt-auto relative z-10">
                 @for (skill of job.skills; track skill) {
                   <span
-                    class="px-4 py-2 bg-transparent border border-[#3e6a51] rounded-md font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#82b392] group-hover:bg-[#3e6a51]/50 group-hover:text-white transition-colors"
+                    class="px-4 py-2 bg-transparent border border-[var(--color-blue)]/30 rounded-md font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[var(--color-blue)] group-hover:bg-[var(--color-blue)]/10 group-hover:text-[var(--color-blue)] transition-colors"
                   >
                     {{ skill }}
                   </span>

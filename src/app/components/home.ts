@@ -47,35 +47,35 @@ import { RouterLink } from "@angular/router";
         >
           <div class="flex items-center gap-3">
             <div
-              class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center shadow-[0_0_15px_rgba(0,107,63,0.2)]"
+              class="w-8 h-8 rounded-lg bg-[var(--color-blue)] flex items-center justify-center shadow-[0_0_15px_rgba(0,102,204,0.3)]"
             >
               <span class="material-icons text-white text-lg">bolt</span>
             </div>
             <span
               class="font-display font-extrabold tracking-tighter text-xl uppercase"
-              >OMAR <span class="text-accent">SABER</span></span
+              >OMAR <span class="text-[var(--color-blue)]">SABER</span></span
             >
           </div>
 
           <nav class="hidden lg:flex gap-8 items-center">
             <a
               href="#about"
-              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-accent transition-colors"
+              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-[var(--color-blue)] transition-colors"
               >About</a
             >
             <a
               href="#experience"
-              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-accent transition-colors"
+              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-[var(--color-blue)] transition-colors"
               >Experience</a
             >
             <a
               href="#expertise"
-              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-accent transition-colors"
+              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-[var(--color-blue)] transition-colors"
               >Expertise</a
             >
             <a
               href="#services"
-              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-accent transition-colors"
+              class="text-[11px] font-medium uppercase tracking-widest text-gray-500 hover:text-[var(--color-blue)] transition-colors"
               >Services</a
             >
           </nav>
@@ -104,11 +104,11 @@ import { RouterLink } from "@angular/router";
       <app-playground id="playground"></app-playground>
 
       <footer
-        class="py-32 bg-[var(--color-secondary)] grid-bg relative border-t border-white/5 overflow-hidden text-white"
+        class="py-32 bg-[var(--color-bg-dark)] grid-bg relative border-t border-white/5 overflow-hidden text-white"
       >
         <!-- Background Glow -->
         <div
-          class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 blur-[120px] rounded-full pointer-events-none"
+          class="absolute top-0 left-1/4 w-96 h-96 bg-[var(--color-blue)]/5 blur-[120px] rounded-full pointer-events-none"
         ></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -135,10 +135,10 @@ import { RouterLink } from "@angular/router";
 
               <div class="space-y-4">
                 <div
-                  class="flex items-center gap-4 text-gray-400 hover:text-accent transition-colors group cursor-pointer"
+                  class="flex items-center gap-4 text-gray-400 hover:text-[var(--color-cyan)] transition-colors group cursor-pointer"
                 >
                   <div
-                    class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors"
+                    class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-cyan)]/10 transition-colors"
                   >
                     <span class="material-icons text-lg">code</span>
                   </div>
@@ -147,10 +147,10 @@ import { RouterLink } from "@angular/router";
                   >
                 </div>
                 <div
-                  class="flex items-center gap-4 text-gray-400 hover:text-accent transition-colors group cursor-pointer"
+                  class="flex items-center gap-4 text-gray-400 hover:text-[var(--color-cyan)] transition-colors group cursor-pointer"
                 >
                   <div
-                    class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-accent/10 transition-colors"
+                    class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-cyan)]/10 transition-colors"
                   >
                     <span class="material-icons text-lg">link</span>
                   </div>
@@ -180,10 +180,10 @@ import { RouterLink } from "@angular/router";
                     <li>
                       <a
                         href="#"
-                        class="text-gray-400 text-xs hover:text-accent transition-all duration-300 flex items-center gap-2 group"
+                        class="text-gray-400 text-xs hover:text-[var(--color-cyan)] transition-all duration-300 flex items-center gap-2 group"
                       >
                         <span
-                          class="w-1 h-1 rounded-full bg-accent/0 group-hover:bg-accent transition-all"
+                          class="w-1 h-1 rounded-full bg-[var(--color-cyan)]/0 group-hover:bg-[var(--color-cyan)] transition-all"
                         ></span>
                         {{ link }}
                       </a>
@@ -204,7 +204,7 @@ import { RouterLink } from "@angular/router";
                 <a
                   href="https://github.com/omaralabaseery"
                   target="_blank"
-                  class="relative z-50 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white hover:border-transparent hover:text-black text-gray-400 transition-all duration-300 group shadow-[0_0_15px_rgba(255,255,255,0.02)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] cursor-pointer"
+                  class="relative z-50 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[var(--color-blue)] hover:border-transparent hover:text-white text-gray-400 transition-all duration-300 group shadow-[0_0_15px_rgba(255,255,255,0.02)] hover:shadow-[0_0_20px_rgba(0,102,204,0.4)] cursor-pointer"
                 >
                   <svg
                     class="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
@@ -222,7 +222,7 @@ import { RouterLink } from "@angular/router";
                 <a
                   href="https://www.linkedin.com/in/omaralabaseery"
                   target="_blank"
-                  class="relative z-50 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#0077b5] hover:border-transparent hover:text-white text-gray-400 transition-all duration-300 group shadow-[0_0_15px_rgba(255,255,255,0.02)] hover:shadow-[0_0_20px_rgba(0,119,181,0.4)] cursor-pointer"
+                  class="relative z-50 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[var(--color-cyan)] hover:border-transparent hover:text-[var(--color-bg-dark)] text-gray-400 transition-all duration-300 group shadow-[0_0_15px_rgba(255,255,255,0.02)] hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] cursor-pointer"
                 >
                   <svg
                     class="w-5 h-5 group-hover:scale-110 transition-transform duration-300"

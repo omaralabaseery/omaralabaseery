@@ -14,18 +14,18 @@ interface ConnectionLink {
     <section class="py-32 px-4 md:px-20 bg-white relative overflow-hidden min-h-screen flex flex-col items-center justify-center">
       <!-- Section Header -->
       <div class="text-center mb-24 relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/5 border border-secondary/10 mb-6 font-mono text-[9px] uppercase tracking-widest text-secondary">
-          <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-blue)]/5 border border-[var(--color-blue)]/10 mb-6 font-mono text-[9px] uppercase tracking-widest text-[var(--color-blue)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] animate-pulse"></span>
           Neural Lab: Active
         </div>
         <h2 class="text-5xl md:text-7xl font-display font-extrabold tracking-tighter uppercase mb-6 text-black leading-none">
-          AI Orchestration<br><span class="text-secondary/30">Lab</span>
+          AI Orchestration<br><span class="text-gray-400">Lab</span>
         </h2>
         <p class="text-gray-400 font-mono text-[10px] uppercase tracking-[0.3em]">Experimental Sandbox for Agentic Logic</p>
       </div>
 
       <!-- Orchestration Lab Area (Cyber-Premium Style) -->
-      <div #playground class="relative w-full max-w-6xl h-[700px] border border-black/5 rounded-[48px] bg-secondary overflow-hidden group/canvas shadow-[0_40px_100px_rgba(0,64,36,0.15)] transition-all duration-700">
+      <div #playground class="relative w-full max-w-6xl h-[700px] border border-black/5 rounded-[48px] bg-[var(--color-bg-dark)] overflow-hidden group/canvas shadow-[0_40px_100px_rgba(0,102,204,0.15)] transition-all duration-700">
         
         <!-- Technical Pattern Overlay -->
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" 
@@ -92,7 +92,7 @@ interface ConnectionLink {
         <!-- Telemetry Data -->
         <div class="absolute bottom-10 left-10 font-mono text-[8px] text-white/30 uppercase tracking-[0.3em] space-y-2 pointer-events-none">
           <div class="flex items-center gap-4">
-            <span class="w-1 h-1 rounded-full bg-secondary animate-ping"></span>
+            <span class="w-1 h-1 rounded-full bg-[var(--color-cyan)] animate-ping"></span>
             SYNC STATUS: NOMINAL
           </div>
           <p>LOAD FACTOR: 0.142ms</p>
