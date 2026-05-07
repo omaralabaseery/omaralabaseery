@@ -1134,9 +1134,12 @@
     const append = (sender, text) => {
       const el = document.createElement('div');
       el.className = `chat-bar-msg ${sender}`;
+      // User messages: plain escaped text. Bot messages: render basic markdown.
+      const bubble =
+        sender === 'bot' ? renderMarkdown(text) : escapeHtml(text);
       el.innerHTML = `
         <div class="chat-bar-msg-avatar">${sender === 'bot' ? BOT_AVATAR : USER_AVATAR}</div>
-        <div class="chat-bar-msg-bubble">${escapeHtml(text)}</div>
+        <div class="chat-bar-msg-bubble">${bubble}</div>
       `;
       list.appendChild(el);
       list.classList.add('has-messages');
@@ -1253,6 +1256,50 @@
     return s.replace(/[&<>"']/g, (c) => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
+  }
+
+  // Tiny markdown renderer for bot messages (XSS-safe — escapes first).
+  // Supports: **bold**, *italic*, `code`, ```code blocks```, "- item" lists,
+  // line breaks, and auto-linkified URLs.
+  function renderMarkdown(s) {
+    if (s == null) return '';
+    let html = escapeHtml(String(s));
+
+    // Code blocks ``` ```  (must run before inline code)
+    html = html.replace(/```([\s\S]*?)```/g, (_, code) =>
+      `<pre class="md-code"><code>${code.replace(/^\n/, '').replace(/\n$/, '')}</code></pre>`
+    );
+
+    // Inline code `code`
+    html = html.replace(/`([^`\n]+)`/g, '<code class="md-inline-code">$1</code>');
+
+    // Bold **text**
+    html = html.replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+
+    // Italic *text*  (avoid clashing with bullets at line start)
+    html = html.replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s.,!?)]|$)/g, '$1<em>$2</em>');
+
+    // Auto-link URLs (only http/https/mailto/tel handled cheaply)
+    html = html.replace(/\b(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener">$1</a>');
+
+    // Bullet lists: lines starting with "- ", "* ", or "• "
+    const lines = html.split('\n');
+    const out = [];
+    let inList = false;
+    for (const ln of lines) {
+      const m = ln.match(/^\s*[-*•]\s+(.+)$/);
+      if (m) {
+        if (!inList) { out.push('<ul class="md-list">'); inList = true; }
+        out.push(`<li>${m[1]}</li>`);
+      } else {
+        if (inList) { out.push('</ul>'); inList = false; }
+        out.push(ln);
+      }
+    }
+    if (inList) out.push('</ul>');
+
+    return out.join('\n');
   }
 
   function sendChatbotMessage() {

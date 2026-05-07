@@ -761,6 +761,66 @@ html[data-theme="light"] .chat-bar {
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
+.chat-bar-msg-bubble strong { font-weight: 700; color: var(--cyan); }
+.chat-bar-msg.user .chat-bar-msg-bubble strong { color: #fff; }
+.chat-bar-msg-bubble em { font-style: italic; opacity: 0.9; }
+.chat-bar-msg-bubble a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.chat-bar-msg.user .chat-bar-msg-bubble a { color: #fff; }
+.chat-bar-msg-bubble .md-inline-code {
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 0.05rem 0.4rem;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.82em;
+  color: #67e8f9;
+}
+.chat-bar-msg.user .chat-bar-msg-bubble .md-inline-code {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.chat-bar-msg-bubble .md-code {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+.chat-bar-msg-bubble .md-code code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: #a5f3fc;
+  background: transparent;
+}
+.chat-bar-msg-bubble .md-list {
+  margin: 0.4rem 0;
+  padding-inline-start: 1.2rem;
+  list-style: none;
+}
+.chat-bar-msg-bubble .md-list li {
+  position: relative;
+  margin: 0.2rem 0;
+  padding-inline-start: 0.4rem;
+}
+.chat-bar-msg-bubble .md-list li::before {
+  content: "•";
+  position: absolute;
+  inset-inline-start: -0.6rem;
+  color: var(--cyan);
+  font-weight: 700;
+}
+.chat-bar-msg.user .chat-bar-msg-bubble .md-list li::before { color: #fff; }
+/* Disable pre-line inside lists/code so explicit newlines in source don't double-space */
+.chat-bar-msg-bubble .md-list,
+.chat-bar-msg-bubble .md-code { white-space: normal; }
+.chat-bar-msg-bubble .md-code { white-space: pre; }
 .chat-bar-msg.bot .chat-bar-msg-bubble {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(34, 211, 238, 0.2);
