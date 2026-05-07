@@ -157,6 +157,8 @@ open_to:     Consulting · Backend architecture · CTO advisory
 
 ## 🏆 Certifications
 
+<div align="center">
+
 <table>
   <tr>
     <td align="center" width="25%">🏅<br/><b>PMP</b><br/><sub>PMI · 2025 – 2028</sub></td>
@@ -172,6 +174,8 @@ open_to:     Consulting · Backend architecture · CTO advisory
   </tr>
 </table>
 
+</div>
+
 ---
 
 ## 📊 GitHub Stats
@@ -179,14 +183,7 @@ open_to:     Consulting · Backend architecture · CTO advisory
 <div align="center">
 
 <a href="https://github.com/omaralabaseery">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=omaralabaseery&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&icon_color=22d3ee&title_color=22d3ee&bg_color=00000000" alt="Omar's GitHub stats" />
   <img height="170" src="https://streak-stats.demolab.com/?user=omaralabaseery&theme=tokyonight&hide_border=true&ring=22d3ee&fire=7c3aed&currStreakLabel=22d3ee&background=00000000" alt="GitHub streak" />
-</a>
-
-<br /><br />
-
-<a href="https://github.com/omaralabaseery">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=omaralabaseery&layout=compact&theme=tokyonight&hide_border=true&title_color=22d3ee&langs_count=10&bg_color=00000000" alt="Top languages" />
 </a>
 
 </div>
