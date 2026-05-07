@@ -1,13 +1,17 @@
 /**
- * Omar Mohamed — Portfolio Chatbot API
- * Cloudflare Pages Function (auto-deployed from this repo).
+ * Omar Mohamed — Cloudflare Worker entry point
  *
- * Endpoint: POST /api/chat
- * Body:     { messages: [{ role: "user"|"assistant", content: string }], lang?: "en"|"ar" }
- * Reply:    { reply: string }
+ * Cloudflare auto-detects this file at the repo root and treats the
+ * project as "Worker with Static Assets" — letting us add real
+ * Variables/Secrets (like CLAUDE_API_KEY) and a runtime function.
  *
- * The CLAUDE_API_KEY is stored as a Pages project Environment Variable
- * (encrypted), never exposed to the browser or to this repo.
+ * Routing:
+ *   POST /api/chat   → Claude proxy (this file)
+ *   anything else    → served from static assets (HTML/CSS/JS)
+ *
+ * The CLAUDE_API_KEY is stored as an encrypted Worker Secret in
+ * Cloudflare's dashboard. It never appears in the browser or in
+ * this repo.
  */
 
 const SYSTEM_PROMPT = `You are Omar Mohamed's AI Assistant on his professional portfolio website. Your only job is to answer questions about Omar's profile.
@@ -131,20 +135,15 @@ function jsonResponse(obj, status = 200) {
   });
 }
 
-// Handle CORS preflight
-export async function onRequestOptions() {
-  return new Response(null, { status: 204, headers: corsHeaders });
-}
-
-// Handle the POST request
-export async function onRequestPost(context) {
-  const { request, env } = context;
-
+async function handleChat(request, env) {
+  if (request.method === 'OPTIONS') {
+    return new Response(null, { status: 204, headers: corsHeaders });
+  }
+  if (request.method !== 'POST') {
+    return jsonResponse({ error: 'Use POST with JSON body { messages: [...] }' }, 405);
+  }
   if (!env.CLAUDE_API_KEY) {
-    return jsonResponse(
-      { error: 'Server is not configured (missing CLAUDE_API_KEY).' },
-      500
-    );
+    return jsonResponse({ error: 'Server is not configured (missing CLAUDE_API_KEY).' }, 500);
   }
 
   let body;
@@ -214,3 +213,21 @@ export async function onRequestPost(context) {
     );
   }
 }
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // Route /api/chat to the Claude proxy
+    if (url.pathname === '/api/chat') {
+      return handleChat(request, env);
+    }
+
+    // Everything else → static assets (index.html, css, js, images, etc.)
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
+    return new Response('Not found', { status: 404 });
+  },
+};
