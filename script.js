@@ -192,7 +192,7 @@
     const itemHtml = (it) => {
       const icon = it.iconUrl
         ? `<span class="marquee-icon" data-emoji="${it.emoji}">
-             <img src="${it.iconUrl}" alt=""
+             <img src="${it.iconUrl}" alt="" width="22" height="22" loading="lazy" decoding="async"
                   onerror="this.parentElement.classList.add('failed');this.remove();" />
            </span>`
         : `<span class="marquee-icon" data-emoji="${it.emoji}" style="font-size:1.1rem">${it.emoji}</span>`;
@@ -813,7 +813,7 @@
       card.style.transitionDelay = (i * 0.03) + 's';
       const iconHtml = skill.iconUrl
         ? `<div class="skill-logo skill-logo-img" data-emoji="${skill.icon || '⚡'}">
-             <img src="${skill.iconUrl}" alt="" loading="lazy"
+             <img src="${skill.iconUrl}" alt="" width="38" height="38" loading="lazy" decoding="async"
                   onerror="this.parentElement.classList.add('failed');this.remove();" />
            </div>`
         : `<div class="skill-logo">${skill.icon || '⚡'}</div>`;
