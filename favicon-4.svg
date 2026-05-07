@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark rounded background -->
+  <rect width="64" height="64" rx="14" fill="#0a0a1a"/>
+
+  <!-- Subtle inner border -->
+  <rect x="2" y="2" width="60" height="60" rx="12"
+        fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Two interlocking arcs forming an abstract O -->
+  <!-- Top-left arc (cyan) -->
+  <path d="M 32 12
+           A 20 20 0 0 0 12 32"
+        fill="none" stroke="url(#cyan)" stroke-width="6"
+        stroke-linecap="round"/>
+
+  <!-- Bottom-right arc (violet) -->
+  <path d="M 32 52
+           A 20 20 0 0 0 52 32"
+        fill="none" stroke="url(#violet)" stroke-width="6"
+        stroke-linecap="round"/>
+
+  <!-- Two thin opposing arcs to complete the loop -->
+  <path d="M 12 32
+           A 20 20 0 0 0 32 52"
+        fill="none" stroke="url(#violet)" stroke-width="2"
+        stroke-linecap="round" stroke-opacity="0.55"/>
+
+  <path d="M 52 32
+           A 20 20 0 0 0 32 12"
+        fill="none" stroke="url(#cyan)" stroke-width="2"
+        stroke-linecap="round" stroke-opacity="0.55"/>
+
+  <!-- Centre node (AI core) -->
+  <circle cx="32" cy="32" r="4" fill="#67e8f9"/>
+  <circle cx="32" cy="32" r="7" fill="none"
+          stroke="#67e8f9" stroke-width="1" stroke-opacity="0.4"/>
+
+  <!-- Connecting nodes at the seam points -->
+  <circle cx="32" cy="12" r="2.5" fill="#22d3ee"/>
+  <circle cx="32" cy="52" r="2.5" fill="#d946ef"/>
+  <circle cx="12" cy="32" r="2.5" fill="#22d3ee"/>
+  <circle cx="52" cy="32" r="2.5" fill="#d946ef"/>
+</svg>
