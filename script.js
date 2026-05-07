@@ -104,25 +104,25 @@
   ];
 
   // ----- LOGO BADGE LIBRARY -----
-  // image: optional path to a real logo file inside profile/logos/
-  //        (you can drop a logo file there manually; if it loads, it will show, else fall back to text)
-  // text + bg: fallback text badge
+  // To enable a real company logo: drop a PNG into /logos/ AND add an
+  // `image: 'logos/<name>.png'` field to the entry below.
+  // Without `image`, a clean text badge is shown (no network request).
   const LOGOS = {
-    jameia:   { image: 'logos/jameia.png',     text: 'JM',   bg: 'linear-gradient(135deg,#f97316,#ef4444)', fg: '#fff' },
-    dyar:     { image: 'logos/dyar.png',       text: 'DH',   bg: 'linear-gradient(135deg,#0f766e,#14b8a6)', fg: '#fff' },
-    arrc:     { image: 'logos/arrc.png',       text: 'AR',   bg: 'linear-gradient(135deg,#1e3a8a,#3b82f6)', fg: '#fff' },
-    infantry: { image: 'logos/infantry.png',   text: 'IH',   bg: 'linear-gradient(135deg,#365314,#65a30d)', fg: '#fff' },
-    freelance:{                                text: 'FR',   bg: 'linear-gradient(135deg,#475569,#94a3b8)', fg: '#fff' },
-    pmi:      { image: 'logos/pmi.png',        text: 'PMI',  bg: 'linear-gradient(135deg,#7c3aed,#a855f7)', fg: '#fff' },
-    microsoft:{ image: 'logos/microsoft.png',  text: 'MS',   bg: 'linear-gradient(135deg,#0078d4,#005a9e)', fg: '#fff' },
-    depi:     { image: 'logos/depi.png',       text: 'DEPI', bg: 'linear-gradient(135deg,#15803d,#22c55e)', fg: '#fff' },
-    fue:      { image: 'logos/fue.png',        text: 'FUE',  bg: 'linear-gradient(135deg,#991b1b,#dc2626)', fg: '#fff' },
-    cincinnati:{ image: 'logos/cincinnati.png',text: 'UC',   bg: 'linear-gradient(135deg,#991b1b,#000000)', fg: '#fff' },
-    bue:      { image: 'logos/bue.png',        text: 'BUE',  bg: 'linear-gradient(135deg,#1e40af,#3b82f6)', fg: '#fff' },
-    zewail:   { image: 'logos/zewail.png',     text: 'ZC',   bg: 'linear-gradient(135deg,#0e7490,#06b6d4)', fg: '#fff' },
-    iao:      { image: 'logos/iao.png',        text: 'IAO',  bg: 'linear-gradient(135deg,#7c2d12,#ea580c)', fg: '#fff' },
-    aitb:     { image: 'logos/aitb.png',       text: 'AITB', bg: 'linear-gradient(135deg,#1e3a8a,#f97316)', fg: '#fff' },
-    ottobock: { image: 'logos/ottobock.png',   text: 'OB',   bg: 'linear-gradient(135deg,#fbbf24,#f59e0b)', fg: '#1f2937' },
+    jameia:    { text: 'JM',   bg: 'linear-gradient(135deg,#f97316,#ef4444)', fg: '#fff' },
+    dyar:      { text: 'DH',   bg: 'linear-gradient(135deg,#0f766e,#14b8a6)', fg: '#fff' },
+    arrc:      { text: 'AR',   bg: 'linear-gradient(135deg,#1e3a8a,#3b82f6)', fg: '#fff' },
+    infantry:  { text: 'IH',   bg: 'linear-gradient(135deg,#365314,#65a30d)', fg: '#fff' },
+    freelance: { text: 'FR',   bg: 'linear-gradient(135deg,#475569,#94a3b8)', fg: '#fff' },
+    pmi:       { text: 'PMI',  bg: 'linear-gradient(135deg,#7c3aed,#a855f7)', fg: '#fff' },
+    microsoft: { text: 'MS',   bg: 'linear-gradient(135deg,#0078d4,#005a9e)', fg: '#fff' },
+    depi:      { text: 'DEPI', bg: 'linear-gradient(135deg,#15803d,#22c55e)', fg: '#fff' },
+    fue:       { text: 'FUE',  bg: 'linear-gradient(135deg,#991b1b,#dc2626)', fg: '#fff' },
+    cincinnati:{ text: 'UC',   bg: 'linear-gradient(135deg,#991b1b,#000000)', fg: '#fff' },
+    bue:       { text: 'BUE',  bg: 'linear-gradient(135deg,#1e40af,#3b82f6)', fg: '#fff' },
+    zewail:    { text: 'ZC',   bg: 'linear-gradient(135deg,#0e7490,#06b6d4)', fg: '#fff' },
+    iao:       { text: 'IAO',  bg: 'linear-gradient(135deg,#7c2d12,#ea580c)', fg: '#fff' },
+    aitb:      { text: 'AITB', bg: 'linear-gradient(135deg,#1e3a8a,#f97316)', fg: '#fff' },
+    ottobock:  { text: 'OB',   bg: 'linear-gradient(135deg,#fbbf24,#f59e0b)', fg: '#1f2937' },
   };
 
   // Cache of which logo files actually exist (HEAD-checked once at startup)
