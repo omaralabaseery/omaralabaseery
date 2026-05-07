@@ -1073,8 +1073,40 @@
   }
 
   // ------------------------------------------------------------
-  // HERO INLINE CHAT
+  // HERO INLINE CHAT  (Claude-powered via Cloudflare Worker)
   // ------------------------------------------------------------
+  // Paste your Cloudflare Worker URL here to enable real Claude responses.
+  // If left empty, the chat falls back to the simple keyword-based replies.
+  // Setup steps: see cloudflare-worker/README.md
+  const CHATBOT_API_URL = '';   // <-- e.g. 'https://omar-chat.your-subdomain.workers.dev'
+
+  // Conversation history for the API call (last N turns)
+  const heroChatHistory = [];
+
+  async function askClaude(userText) {
+    heroChatHistory.push({ role: 'user', content: userText });
+    try {
+      const res = await fetch(CHATBOT_API_URL + '/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: heroChatHistory.slice(-10),
+          lang: currentLang,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return data.error || `Server error (${res.status}). Please try again.`;
+      }
+      const reply = (data.reply || '').trim() || "Sorry, I couldn't generate a reply.";
+      heroChatHistory.push({ role: 'assistant', content: reply });
+      // Cap history at 12 to keep payload small
+      if (heroChatHistory.length > 12) heroChatHistory.splice(0, heroChatHistory.length - 12);
+      return reply;
+    } catch (err) {
+      return 'Network error. Please try again, or email omaralabaseery81@gmail.com.';
+    }
+  }
 
   // Inline reply thread inside the hero chat bar (no floating window)
   function initHeroChat() {
@@ -1113,7 +1145,7 @@
       return el;
     };
 
-    const submit = () => {
+    const submit = async () => {
       const v = input.value.trim();
       if (!v) return;
       input.value = '';
@@ -1123,11 +1155,19 @@
       if (chips) chips.style.display = 'none';
 
       const typing = showTyping();
-      setTimeout(() => {
-        typing.remove();
-        const reply = generateBotResponse(v);
-        append('bot', reply);
-      }, 700);
+
+      let reply;
+      if (CHATBOT_API_URL) {
+        // Real Claude via Cloudflare Worker
+        reply = await askClaude(v);
+      } else {
+        // Local fallback (keyword-based) — mimic small delay for UX
+        await new Promise((r) => setTimeout(r, 600));
+        reply = generateBotResponse(v);
+      }
+
+      typing.remove();
+      append('bot', reply);
     };
 
     send.addEventListener('click', submit);
