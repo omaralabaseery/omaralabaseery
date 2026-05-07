@@ -1073,16 +1073,12 @@
   }
 
   // ------------------------------------------------------------
-  // HERO INLINE CHAT  (Claude-powered via Cloudflare Pages Function)
+  // HERO INLINE CHAT  (Claude-powered via n8n workflow)
   // ------------------------------------------------------------
-  // Default '/api/chat' is a relative path — it auto-resolves against
-  // whichever domain the site is loaded from. So:
-  //   - On Cloudflare Pages → calls https://<your-pages>.pages.dev/api/chat ✓
-  //   - On GitHub Pages     → calls /api/chat (404, falls back to local) ✓
-  // To force a specific origin, paste the full URL instead, e.g.
-  //   const CHATBOT_API_URL = 'https://omar-chat.pages.dev/api/chat';
-  // Setup steps: see functions/README.md
-  const CHATBOT_API_URL = '/api/chat';
+  // The n8n workflow holds the CLAUDE_API_KEY as a secured credential
+  // and applies the system prompt server-side. See n8n/omar-chatbot-workflow.json.
+  // Set this to '' to fall back to the local keyword-based replies.
+  const CHATBOT_API_URL = 'https://alabaseery.app.n8n.cloud/webhook/omar-chat';
 
   // Conversation history for the API call (last N turns)
   const heroChatHistory = [];
