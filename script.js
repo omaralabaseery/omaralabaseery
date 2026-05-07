@@ -1073,20 +1073,26 @@
   }
 
   // ------------------------------------------------------------
-  // HERO INLINE CHAT  (Claude-powered via Cloudflare Worker)
+  // HERO INLINE CHAT  (Claude-powered via Cloudflare Pages Function)
   // ------------------------------------------------------------
-  // Paste your Cloudflare Worker URL here to enable real Claude responses.
-  // If left empty, the chat falls back to the simple keyword-based replies.
-  // Setup steps: see cloudflare-worker/README.md
-  const CHATBOT_API_URL = '';   // <-- e.g. 'https://omar-chat.your-subdomain.workers.dev'
+  // Default '/api/chat' is a relative path — it auto-resolves against
+  // whichever domain the site is loaded from. So:
+  //   - On Cloudflare Pages → calls https://<your-pages>.pages.dev/api/chat ✓
+  //   - On GitHub Pages     → calls /api/chat (404, falls back to local) ✓
+  // To force a specific origin, paste the full URL instead, e.g.
+  //   const CHATBOT_API_URL = 'https://omar-chat.pages.dev/api/chat';
+  // Setup steps: see functions/README.md
+  const CHATBOT_API_URL = '/api/chat';
 
   // Conversation history for the API call (last N turns)
   const heroChatHistory = [];
 
+  // Returns the assistant's reply string, or null if the API isn't reachable
+  // (so the caller can fall back to local keyword-based responses).
   async function askClaude(userText) {
     heroChatHistory.push({ role: 'user', content: userText });
     try {
-      const res = await fetch(CHATBOT_API_URL + '/chat', {
+      const res = await fetch(CHATBOT_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1094,9 +1100,17 @@
           lang: currentLang,
         }),
       });
+      // 404 / 405 → endpoint not deployed at this origin → fall back gracefully
+      if (res.status === 404 || res.status === 405) {
+        heroChatHistory.pop();
+        return null;
+      }
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        return data.error || `Server error (${res.status}). Please try again.`;
+        // 500 (CLAUDE_API_KEY missing) or 502 (upstream) — surface a soft message
+        return data.error
+          ? `${data.error}`
+          : `Server error (${res.status}). Please try again later.`;
       }
       const reply = (data.reply || '').trim() || "Sorry, I couldn't generate a reply.";
       heroChatHistory.push({ role: 'assistant', content: reply });
@@ -1104,7 +1118,9 @@
       if (heroChatHistory.length > 12) heroChatHistory.splice(0, heroChatHistory.length - 12);
       return reply;
     } catch (err) {
-      return 'Network error. Please try again, or email omaralabaseery81@gmail.com.';
+      // Network / CORS error → fall back to local responses
+      heroChatHistory.pop();
+      return null;
     }
   }
 
@@ -1156,13 +1172,14 @@
 
       const typing = showTyping();
 
-      let reply;
+      let reply = null;
       if (CHATBOT_API_URL) {
-        // Real Claude via Cloudflare Worker
+        // Try real Claude via Cloudflare Pages Function
         reply = await askClaude(v);
-      } else {
+      }
+      if (reply == null) {
         // Local fallback (keyword-based) — mimic small delay for UX
-        await new Promise((r) => setTimeout(r, 600));
+        await new Promise((r) => setTimeout(r, 400));
         reply = generateBotResponse(v);
       }
 

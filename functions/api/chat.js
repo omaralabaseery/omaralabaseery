@@ -1,14 +1,13 @@
 /**
- * Omar Mohamed — Portfolio Chatbot Proxy
- * Cloudflare Worker that securely calls the Anthropic API.
+ * Omar Mohamed — Portfolio Chatbot API
+ * Cloudflare Pages Function (auto-deployed from this repo).
  *
- * The CLAUDE_API_KEY is stored as a Worker Secret (never exposed
- * to the browser). The frontend calls this worker, which forwards
- * the message to Claude with a strict system prompt.
+ * Endpoint: POST /api/chat
+ * Body:     { messages: [{ role: "user"|"assistant", content: string }], lang?: "en"|"ar" }
+ * Reply:    { reply: string }
  *
- * Endpoint: POST /chat
- *   Body:  { messages: [{ role: "user"|"assistant", content: string }], lang?: "en"|"ar" }
- *   Reply: { reply: string }
+ * The CLAUDE_API_KEY is stored as a Pages project Environment Variable
+ * (encrypted), never exposed to the browser or to this repo.
  */
 
 const SYSTEM_PROMPT = `You are Omar Mohamed's AI Assistant on his professional portfolio website. Your only job is to answer questions about Omar's profile.
@@ -118,104 +117,100 @@ Services Omar offers:
 
 8. Do not produce harmful, illegal, deceptive, or NSFW content under any circumstance.`;
 
-// Allow the GitHub Pages site (and localhost during dev) to call the worker.
-const ALLOWED_ORIGINS = [
-  'https://omaralabaseery.github.io',
-  'http://localhost:5181',
-  'http://localhost:8080',
-  'http://127.0.0.1:5181',
-];
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Max-Age': '86400',
+};
 
-function corsHeaders(origin) {
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
-  return {
-    'Access-Control-Allow-Origin': allowed,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': '86400',
-    Vary: 'Origin',
-  };
-}
-
-function jsonResponse(obj, status, origin) {
+function jsonResponse(obj, status = 200) {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders },
   });
 }
 
-export default {
-  async fetch(request, env) {
-    const origin = request.headers.get('Origin') || '';
+// Handle CORS preflight
+export async function onRequestOptions() {
+  return new Response(null, { status: 204, headers: corsHeaders });
+}
 
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: corsHeaders(origin) });
-    }
+// Handle the POST request
+export async function onRequestPost(context) {
+  const { request, env } = context;
 
-    if (request.method !== 'POST') {
-      return jsonResponse({ error: 'Use POST with JSON body { messages: [...] }' }, 405, origin);
-    }
+  if (!env.CLAUDE_API_KEY) {
+    return jsonResponse(
+      { error: 'Server is not configured (missing CLAUDE_API_KEY).' },
+      500
+    );
+  }
 
-    if (!env.CLAUDE_API_KEY) {
-      return jsonResponse({ error: 'Server is not configured (missing CLAUDE_API_KEY).' }, 500, origin);
-    }
+  let body;
+  try {
+    body = await request.json();
+  } catch (e) {
+    return jsonResponse({ error: 'Invalid JSON body.' }, 400);
+  }
 
-    let body;
-    try {
-      body = await request.json();
-    } catch (e) {
-      return jsonResponse({ error: 'Invalid JSON body.' }, 400, origin);
-    }
+  const messages = Array.isArray(body?.messages) ? body.messages : [];
+  if (messages.length === 0) {
+    return jsonResponse({ error: 'messages array is required.' }, 400);
+  }
 
-    const messages = Array.isArray(body?.messages) ? body.messages : [];
-    if (messages.length === 0) {
-      return jsonResponse({ error: 'messages array is required.' }, 400, origin);
-    }
+  const safeMessages = messages
+    .filter(
+      (m) =>
+        m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string'
+    )
+    .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }))
+    .slice(-10);
 
-    // Basic validation + guardrails
-    const safeMessages = messages
-      .filter((m) => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
-      .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }))
-      .slice(-10); // keep only last 10 turns
+  if (safeMessages.length === 0 || safeMessages[0].role !== 'user') {
+    return jsonResponse({ error: 'First message must be from "user".' }, 400);
+  }
 
-    if (safeMessages.length === 0 || safeMessages[0].role !== 'user') {
-      return jsonResponse({ error: 'First message must be from "user".' }, 400, origin);
-    }
+  try {
+    const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': env.CLAUDE_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 600,
+        system: [
+          { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
+        ],
+        messages: safeMessages,
+      }),
+    });
 
-    try {
-      const apiRes = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'x-api-key': env.CLAUDE_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'content-type': 'application/json',
+    if (!apiRes.ok) {
+      const errText = await apiRes.text();
+      return jsonResponse(
+        {
+          error: 'Upstream API error',
+          status: apiRes.status,
+          detail: errText.slice(0, 500),
         },
-        body: JSON.stringify({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 600,
-          system: [
-            { type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } },
-          ],
-          messages: safeMessages,
-        }),
-      });
-
-      if (!apiRes.ok) {
-        const errText = await apiRes.text();
-        return jsonResponse(
-          { error: 'Upstream API error', status: apiRes.status, detail: errText.slice(0, 500) },
-          502,
-          origin
-        );
-      }
-
-      const data = await apiRes.json();
-      const reply = (data?.content?.[0]?.text || '').trim()
-        || "I'm here to help with Omar's profile. What would you like to know?";
-
-      return jsonResponse({ reply }, 200, origin);
-    } catch (err) {
-      return jsonResponse({ error: 'Worker error', detail: String(err).slice(0, 500) }, 500, origin);
+        502
+      );
     }
-  },
-};
+
+    const data = await apiRes.json();
+    const reply =
+      (data?.content?.[0]?.text || '').trim() ||
+      "I'm here to help with Omar's profile. What would you like to know?";
+
+    return jsonResponse({ reply });
+  } catch (err) {
+    return jsonResponse(
+      { error: 'Worker error', detail: String(err).slice(0, 500) },
+      500
+    );
+  }
+}
