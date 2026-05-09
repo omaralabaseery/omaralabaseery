@@ -1496,6 +1496,102 @@ html[dir="rtl"] .chat-bar-send { right: auto; left: 0.5rem; }
 .stat-value .counter { display: inline-block; min-width: 1.6ch; text-align: end; }
 .stat-label { font-size: 0.85rem; color: var(--text-muted); }
 
+/* ---------- Services ---------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.service-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.6rem 1.5rem;
+  overflow: hidden;
+  transition: transform 300ms ease, border-color 300ms ease;
+  contain: layout paint;
+}
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent, linear-gradient(135deg, var(--cyan), var(--violet)));
+  opacity: 0.12;
+  filter: blur(20px);
+  z-index: -1;
+  transition: filter 300ms ease, opacity 300ms ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+}
+.service-card:hover::before { filter: blur(28px); opacity: 0.22; }
+.service-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent, linear-gradient(90deg, var(--cyan), var(--violet)));
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.service-card:hover::after { opacity: 1; }
+
+.service-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--accent, linear-gradient(135deg, var(--cyan), var(--violet)));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--cyan) 25%, transparent);
+}
+.service-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+html[data-theme="light"] .service-title { color: var(--text); }
+.service-desc {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.service-desc strong { color: var(--cyan); font-weight: 700; }
+html[data-theme="light"] .service-desc strong { color: var(--violet); }
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.service-tags span {
+  padding: 0.25rem 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+html[data-theme="light"] .service-tags span {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+@media (max-width: 768px) {
+  .service-card { padding: 1.3rem 1.2rem; }
+  .service-icon { width: 44px; height: 44px; font-size: 1.4rem; }
+  .service-title { font-size: 1.05rem; }
+  .service-desc { font-size: 0.88rem; }
+}
+
 /* ---------- Experience Timeline ---------- */
 .timeline {
   position: relative;
