@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # The dashboard is for the owner only — discourage indexing.
-Disallow: /dashboard.html
+Disallow: /dashboard/
 Disallow: /n8n/
 Disallow: /logos/
 
