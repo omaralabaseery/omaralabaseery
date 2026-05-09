@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Dashboard — Omar Mohamed</title>
+  <link rel="icon" type="image/svg+xml" href="favicon-om.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Tokens ---------- */
+    :root {
+      --bg: #0a0a1a;
+      --panel: rgba(15, 23, 42, 0.55);
+      --border: rgba(255, 255, 255, 0.1);
+      --cyan: #22d3ee;
+      --violet: #7c3aed;
+      --green: #10b981;
+      --orange: #f97316;
+      --pink: #ec4899;
+      --blue: #3b82f6;
+      --text: #fff;
+      --text-soft: #d1d5db;
+      --text-muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(34, 211, 238, 0.18), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(124, 58, 237, 0.18), transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.10), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ---------- Header ---------- */
+    .head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-weight: 800; font-size: 1.4rem;
+    }
+    .brand-mark {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace; font-weight: 800;
+      font-size: 0.95rem;
+    }
+    .head-meta { font-size: 0.85rem; color: var(--text-muted); }
+    .head-meta a { color: var(--cyan); text-decoration: none; }
+    .head-meta a:hover { text-decoration: underline; }
+
+    /* ---------- PIN gate ---------- */
+    .gate {
+      max-width: 420px; margin: 8vh auto 0;
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.25rem 2rem;
+      text-align: center;
+    }
+    .gate h2 {
+      margin: 0 0 0.5rem;
+      background: linear-gradient(90deg, var(--cyan), #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-size: 1.5rem;
+    }
+    .gate p { color: var(--text-muted); margin: 0 0 1.5rem; font-size: 0.9rem; }
+    .pin-input {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.5rem;
+      text-align: center;
+      letter-spacing: 0.5em;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      outline: none;
+      transition: border-color 200ms;
+    }
+    .pin-input:focus { border-color: var(--cyan); }
+    .pin-error {
+      color: #ef4444; font-size: 0.85rem;
+      min-height: 1.2em; margin-top: 0.6rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5rem; padding: 0.75rem 1.25rem;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      color: #fff; border: 0; border-radius: 12px;
+      font-weight: 600; cursor: pointer; font-family: inherit;
+      width: 100%; margin-top: 0.85rem;
+      transition: transform 200ms, box-shadow 200ms;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(34, 211, 238, 0.25); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--border);
+      width: auto;
+    }
+    .btn-outline:hover { border-color: var(--cyan); background: rgba(34, 211, 238, 0.08); }
+
+    /* ---------- Stats grid ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .stat {
+      position: relative;
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.5rem 1.4rem;
+      overflow: hidden;
+      transition: transform 200ms, border-color 200ms;
+    }
+    .stat:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, 0.18); }
+    .stat::before {
+      content: ""; position: absolute; inset: 0;
+      background: var(--accent, linear-gradient(135deg, var(--cyan), var(--violet)));
+      opacity: 0.12; z-index: -1;
+    }
+    .stat-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: var(--accent, linear-gradient(135deg, var(--cyan), var(--violet)));
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1rem;
+    }
+    .stat-label {
+      font-size: 0.8rem; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .stat-value {
+      font-size: 2.4rem; font-weight: 800;
+      margin-top: 0.4rem;
+      font-variant-numeric: tabular-nums;
+      background: linear-gradient(90deg, var(--cyan), #a78bfa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      min-height: 1em;
+    }
+    .stat-value.loading::after {
+      content: "—"; color: var(--text-muted);
+      -webkit-text-fill-color: var(--text-muted);
+    }
+    .stat-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+    /* ---------- Quick links ---------- */
+    .panel {
+      background: var(--panel);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .panel h3 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+    .link-card {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 200ms;
+    }
+    .link-card:hover {
+      background: rgba(34, 211, 238, 0.08);
+      border-color: var(--cyan);
+      color: #fff;
+      transform: translateX(3px);
+    }
+    .link-card .emoji { font-size: 1.4rem; flex-shrink: 0; }
+    .link-card .meta { display: flex; flex-direction: column; }
+    .link-card .meta strong { font-weight: 600; color: #fff; }
+    .link-card .meta small { color: var(--text-muted); font-size: 0.75rem; }
+
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+    .footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem 0.75rem; }
+      .stat-value { font-size: 2rem; }
+      .head { gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============== PIN GATE ============== -->
+<div id="gate" class="gate">
+  <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔒</div>
+  <h2>Owner Dashboard</h2>
+  <p>Enter the 4-digit PIN to view stats.</p>
+  <input id="pinInput" class="pin-input" type="password" inputmode="numeric"
+         pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" autofocus />
+  <div id="pinError" class="pin-error"></div>
+  <button class="btn" id="pinBtn">Unlock</button>
+</div>
+
+<!-- ============== DASHBOARD ============== -->
+<div id="dash" class="container" hidden>
+
+  <!-- Header -->
+  <div class="head">
+    <div class="brand">
+      <span class="brand-mark">OM</span>
+      <span>Omar's Dashboard</span>
+    </div>
+    <div class="head-meta">
+      Last update: <span id="lastUpdate">—</span> ·
+      <a href="#" id="refreshBtn">↻ Refresh</a> ·
+      <a href="index.html">← Site</a>
+    </div>
+  </div>
+
+  <!-- Stats grid -->
+  <div class="grid">
+    <div class="stat" style="--accent: linear-gradient(135deg, #06b6d4, #3b82f6);">
+      <div class="stat-icon">👥</div>
+      <div class="stat-label">Total Visitors</div>
+      <div class="stat-value loading" data-stat="views">0</div>
+      <div class="stat-sub">All-time unique sessions</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #10b981, #14b8a6);">
+      <div class="stat-icon">📧</div>
+      <div class="stat-label">Email Messages</div>
+      <div class="stat-value loading" data-stat="emails">0</div>
+      <div class="stat-sub">Submitted via contact form</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #8b5cf6, #d946ef);">
+      <div class="stat-icon">💬</div>
+      <div class="stat-label">AI Chat Messages</div>
+      <div class="stat-value loading" data-stat="chats">0</div>
+      <div class="stat-sub">Total questions asked to your AI</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #f97316, #ef4444);">
+      <div class="stat-icon">📄</div>
+      <div class="stat-label">CV Downloads</div>
+      <div class="stat-value loading" data-stat="cv_downloads">0</div>
+      <div class="stat-sub">Resume downloads triggered</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #22d3ee, #10b981);">
+      <div class="stat-icon">💼</div>
+      <div class="stat-label">"Hire Me" Clicks</div>
+      <div class="stat-value loading" data-stat="hire_clicks">0</div>
+      <div class="stat-sub">Hero CTA conversions</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #a855f7, #ec4899);">
+      <div class="stat-icon">🚀</div>
+      <div class="stat-label">"View Projects" Clicks</div>
+      <div class="stat-value loading" data-stat="projects_clicks">0</div>
+      <div class="stat-sub">Portfolio engagement</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #facc15, #f97316);">
+      <div class="stat-icon">🌗</div>
+      <div class="stat-label">Theme Toggles</div>
+      <div class="stat-value loading" data-stat="theme_toggles">0</div>
+      <div class="stat-sub">Dark ↔ Light switches</div>
+    </div>
+    <div class="stat" style="--accent: linear-gradient(135deg, #ec4899, #a855f7);">
+      <div class="stat-icon">🌐</div>
+      <div class="stat-label">Language Toggles</div>
+      <div class="stat-value loading" data-stat="lang_toggles">0</div>
+      <div class="stat-sub">EN ↔ AR switches</div>
+    </div>
+  </div>
+
+  <!-- External dashboards -->
+  <div class="panel">
+    <h3>🔗 External Dashboards (full data)</h3>
+    <div class="links">
+      <a class="link-card" href="https://web3forms.com/dashboard" target="_blank" rel="noopener">
+        <span class="emoji">📨</span>
+        <span class="meta">
+          <strong>Web3Forms Inbox</strong>
+          <small>Read every email submission</small>
+        </span>
+      </a>
+      <a class="link-card" href="https://analytics.google.com/" target="_blank" rel="noopener">
+        <span class="emoji">📊</span>
+        <span class="meta">
+          <strong>Google Analytics</strong>
+          <small>Demographics, traffic sources</small>
+        </span>
+      </a>
+      <a class="link-card" href="https://search.google.com/search-console" target="_blank" rel="noopener">
+        <span class="emoji">🔍</span>
+        <span class="meta">
+          <strong>Google Search Console</strong>
+          <small>Search visibility &amp; SEO health</small>
+        </span>
+      </a>
+      <a class="link-card" href="https://github.com/omaralabaseery/omaralabaseery/pulse" target="_blank" rel="noopener">
+        <span class="emoji">📈</span>
+        <span class="meta">
+          <strong>GitHub Insights</strong>
+          <small>Repo traffic &amp; clones</small>
+        </span>
+      </a>
+      <a class="link-card" href="https://alabaseery.app.n8n.cloud/" target="_blank" rel="noopener">
+        <span class="emoji">🤖</span>
+        <span class="meta">
+          <strong>n8n Workflows</strong>
+          <small>Chatbot executions log</small>
+        </span>
+      </a>
+      <a class="link-card" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">
+        <span class="emoji">☁️</span>
+        <span class="meta">
+          <strong>Cloudflare</strong>
+          <small>DNS &amp; domain control</small>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Counters powered by a public API · auto-refresh every 60s ·
+    <a href="#" id="logoutBtn">Lock dashboard</a>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // CHANGE THIS PIN — anyone with the URL can guess. 4 digits only.
+  // To change: edit this number, push, refresh dashboard.
+  // ============================================================
+  const PIN = '2025';
+
+  // Counter API (free, no signup): https://abacus.jasoncameron.dev/
+  const ANALYTICS_NS = 'omaralabaseery';
+  const ANALYTICS_BASE = 'https://abacus.jasoncameron.dev';
+
+  const STAT_KEYS = [
+    'views', 'emails', 'chats', 'cv_downloads',
+    'hire_clicks', 'projects_clicks', 'theme_toggles', 'lang_toggles'
+  ];
+
+  // ---- PIN gate ----
+  const gate = document.getElementById('gate');
+  const dash = document.getElementById('dash');
+  const pinInput = document.getElementById('pinInput');
+  const pinBtn = document.getElementById('pinBtn');
+  const pinError = document.getElementById('pinError');
+
+  function unlock() {
+    sessionStorage.setItem('dash-unlocked', '1');
+    gate.hidden = true;
+    dash.hidden = false;
+    loadStats();
+    setInterval(loadStats, 60_000);
+  }
+
+  function tryPin() {
+    const v = pinInput.value.trim();
+    if (v === PIN) {
+      pinError.textContent = '';
+      unlock();
+    } else {
+      pinError.textContent = 'Incorrect PIN. Try again.';
+      pinInput.value = '';
+      pinInput.focus();
+    }
+  }
+
+  pinBtn.addEventListener('click', tryPin);
+  pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryPin(); });
+
+  // Auto-unlock if previously verified this session
+  if (sessionStorage.getItem('dash-unlocked') === '1') unlock();
+
+  // ---- Stats fetcher ----
+  function fmt(n) {
+    return new Intl.NumberFormat().format(n);
+  }
+
+  async function loadStats() {
+    const updates = STAT_KEYS.map(async (key) => {
+      const el = document.querySelector('[data-stat="' + key + '"]');
+      try {
+        const res = await fetch(ANALYTICS_BASE + '/get/' + ANALYTICS_NS + '/' + key, { cache: 'no-store' });
+        if (!res.ok) throw new Error('http ' + res.status);
+        const data = await res.json();
+        const value = (typeof data.value === 'number') ? data.value : 0;
+        el.classList.remove('loading');
+        el.textContent = fmt(value);
+      } catch (e) {
+        el.classList.remove('loading');
+        el.textContent = '—';
+      }
+    });
+    await Promise.all(updates);
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.stat-value').forEach(el => el.classList.add('loading'));
+    loadStats();
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem('dash-unlocked');
+    location.reload();
+  });
+</script>
+</body>
+</html>

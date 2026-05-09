@@ -353,6 +353,7 @@
     applyLang(saved);
     $('#langToggle')?.addEventListener('click', () => {
       applyLang(currentLang === 'en' ? 'ar' : 'en');
+      track('lang_toggles');
     });
   }
 
@@ -520,6 +521,30 @@
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  // ============================================================
+  // ANALYTICS — fire-and-forget counters via abacus.jasoncameron.dev
+  // Visible on /dashboard.html (PIN-protected).
+  // ============================================================
+  const ANALYTICS_NS = 'omaralabaseery';
+  const ANALYTICS_BASE = 'https://abacus.jasoncameron.dev';
+
+  function track(key) {
+    try {
+      // Don't await — never block the UI on analytics
+      fetch(ANALYTICS_BASE + '/hit/' + ANALYTICS_NS + '/' + key, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store',
+      }).catch(() => {});
+    } catch (e) { /* ignore */ }
+  }
+
+  function trackOnce(key, sessionFlag) {
+    if (sessionStorage.getItem(sessionFlag)) return;
+    sessionStorage.setItem(sessionFlag, '1');
+    track(key);
+  }
 
   const onReady = (fn) => {
     if (document.readyState === 'loading') {
@@ -1165,6 +1190,7 @@
       if (!v) return;
       input.value = '';
       append('user', v);
+      track('chats');
 
       // Hide the suggestion chips after first send to keep things tidy
       if (chips) chips.style.display = 'none';
@@ -1456,6 +1482,7 @@
           const ok = await sendViaWeb3Forms(data);
           if (ok) {
             form.reset();
+            track('emails');
             showToast('Message sent successfully! Omar will get back to you soon.', 'success');
           } else {
             showToast('Could not send. Try again or email directly.', 'error');
@@ -1468,6 +1495,7 @@
       } else {
         // Path B: mailto fallback — opens visitor's email client
         sendViaMailto(data);
+        track('emails');
         showToast('Opening your email app to send the message…', 'success');
       }
     });
@@ -1602,6 +1630,7 @@
       if (next === 'light') html.setAttribute('data-theme', 'light');
       else html.removeAttribute('data-theme');
       try { localStorage.setItem('omar-theme', next); } catch (e) { /* ignore */ }
+      track('theme_toggles');
     });
   }
 
@@ -1609,9 +1638,40 @@
   // BOOT
   // ------------------------------------------------------------
 
+  // ============================================================
+  // CTA / Download click tracking (one delegated listener for the page)
+  // ============================================================
+  function initClickTracking() {
+    // Count one page-view per session
+    trackOnce('views', 'omar-view-counted');
+
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a, button');
+      if (!a) return;
+
+      // CV download (any link to the resume PDF)
+      const href = a.getAttribute('href') || '';
+      if (/Omar-Saber-Resume\.pdf$/i.test(href)) {
+        track('cv_downloads');
+        return;
+      }
+
+      // Hero CTAs by destination
+      if (href === '#contact' && /hire/i.test(a.textContent)) {
+        track('hire_clicks');
+        return;
+      }
+      if (href === '#projects' && /project/i.test(a.textContent)) {
+        track('projects_clicks');
+        return;
+      }
+    }, { passive: true });
+  }
+
   onReady(async () => {
     initTheme();
     initLang();
+    initClickTracking();
     initParticles();
     initMouseGlow();
     initNav();
