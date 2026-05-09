@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
   <title>Dashboard — Omar Mohamed</title>
-  <link rel="icon" type="image/svg+xml" href="favicon-om.svg" />
+  <link rel="icon" type="image/svg+xml" href="../favicon-om.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    /* ---------- Tokens ---------- */
     :root {
       --bg: #0a0a1a;
       --panel: rgba(15, 23, 42, 0.55);
@@ -16,9 +15,7 @@
       --cyan: #22d3ee;
       --violet: #7c3aed;
       --green: #10b981;
-      --orange: #f97316;
-      --pink: #ec4899;
-      --blue: #3b82f6;
+      --red: #ef4444;
       --text: #fff;
       --text-soft: #d1d5db;
       --text-muted: #9ca3af;
@@ -38,7 +35,6 @@
     }
     .container { max-width: 1100px; margin: 0 auto; }
 
-    /* ---------- Header ---------- */
     .head {
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
@@ -54,11 +50,19 @@
       font-family: 'JetBrains Mono', monospace; font-weight: 800;
       font-size: 0.95rem;
     }
-    .head-meta { font-size: 0.85rem; color: var(--text-muted); }
+    .head-meta { font-size: 0.85rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
     .head-meta a { color: var(--cyan); text-decoration: none; }
     .head-meta a:hover { text-decoration: underline; }
+    .session-timer {
+      display: inline-block; padding: 0.18rem 0.55rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 8px;
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
 
-    /* ---------- PIN gate ---------- */
     .gate {
       max-width: 420px; margin: 8vh auto 0;
       background: var(--panel);
@@ -92,10 +96,12 @@
       transition: border-color 200ms;
     }
     .pin-input:focus { border-color: var(--cyan); }
+    .pin-input:disabled { opacity: 0.4; cursor: not-allowed; }
     .pin-error {
-      color: #ef4444; font-size: 0.85rem;
+      color: var(--red); font-size: 0.85rem;
       min-height: 1.2em; margin-top: 0.6rem;
     }
+    .pin-attempts { color: var(--text-muted); font-size: 0.78rem; margin-top: 0.3rem; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 0.5rem; padding: 0.75rem 1.25rem;
@@ -103,16 +109,11 @@
       color: #fff; border: 0; border-radius: 12px;
       font-weight: 600; cursor: pointer; font-family: inherit;
       width: 100%; margin-top: 0.85rem;
-      transition: transform 200ms, box-shadow 200ms;
+      transition: transform 200ms, box-shadow 200ms, opacity 200ms;
     }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(34, 211, 238, 0.25); }
-    .btn-outline {
-      background: transparent; border: 1px solid var(--border);
-      width: auto;
-    }
-    .btn-outline:hover { border-color: var(--cyan); background: rgba(34, 211, 238, 0.08); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    /* ---------- Stats grid ---------- */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -163,7 +164,6 @@
     }
     .stat-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; }
 
-    /* ---------- Quick links ---------- */
     .panel {
       background: var(--panel);
       backdrop-filter: blur(20px);
@@ -204,6 +204,18 @@
     .link-card .meta strong { font-weight: 600; color: #fff; }
     .link-card .meta small { color: var(--text-muted); font-size: 0.75rem; }
 
+    .warn-banner {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: #fca5a5;
+      margin-top: 1.5rem;
+      text-align: left;
+    }
+    .warn-banner b { color: #fff; }
+
     .footer {
       text-align: center;
       color: var(--text-muted);
@@ -225,17 +237,17 @@
 <div id="gate" class="gate">
   <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔒</div>
   <h2>Owner Dashboard</h2>
-  <p>Enter the 4-digit PIN to view stats.</p>
+  <p>Enter your 6-digit PIN. Locks after 5 min idle / 10 min total.</p>
   <input id="pinInput" class="pin-input" type="password" inputmode="numeric"
-         pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" autofocus />
+         pattern="[0-9]*" maxlength="6" placeholder="••••••" autocomplete="off" autofocus />
   <div id="pinError" class="pin-error"></div>
+  <div id="pinAttempts" class="pin-attempts"></div>
   <button class="btn" id="pinBtn">Unlock</button>
 </div>
 
 <!-- ============== DASHBOARD ============== -->
 <div id="dash" class="container" hidden>
 
-  <!-- Header -->
   <div class="head">
     <div class="brand">
       <span class="brand-mark">OM</span>
@@ -243,12 +255,13 @@
     </div>
     <div class="head-meta">
       Last update: <span id="lastUpdate">—</span> ·
+      Session: <span class="session-timer" id="sessionTimer">—</span> ·
       <a href="#" id="refreshBtn">↻ Refresh</a> ·
-      <a href="index.html">← Site</a>
+      <a href="#" id="lockBtn">🔒 Lock</a> ·
+      <a href="../index.html">← Site</a>
     </div>
   </div>
 
-  <!-- Stats grid -->
   <div class="grid">
     <div class="stat" style="--accent: linear-gradient(135deg, #06b6d4, #3b82f6);">
       <div class="stat-icon">👥</div>
@@ -300,99 +313,222 @@
     </div>
   </div>
 
-  <!-- External dashboards -->
   <div class="panel">
     <h3>🔗 External Dashboards (full data)</h3>
     <div class="links">
       <a class="link-card" href="https://web3forms.com/dashboard" target="_blank" rel="noopener">
         <span class="emoji">📨</span>
-        <span class="meta">
-          <strong>Web3Forms Inbox</strong>
-          <small>Read every email submission</small>
-        </span>
+        <span class="meta"><strong>Web3Forms Inbox</strong><small>Read every email submission</small></span>
       </a>
       <a class="link-card" href="https://analytics.google.com/" target="_blank" rel="noopener">
         <span class="emoji">📊</span>
-        <span class="meta">
-          <strong>Google Analytics</strong>
-          <small>Demographics, traffic sources</small>
-        </span>
+        <span class="meta"><strong>Google Analytics</strong><small>Demographics, traffic sources</small></span>
       </a>
       <a class="link-card" href="https://search.google.com/search-console" target="_blank" rel="noopener">
         <span class="emoji">🔍</span>
-        <span class="meta">
-          <strong>Google Search Console</strong>
-          <small>Search visibility &amp; SEO health</small>
-        </span>
+        <span class="meta"><strong>Google Search Console</strong><small>Search visibility &amp; SEO health</small></span>
       </a>
       <a class="link-card" href="https://github.com/omaralabaseery/omaralabaseery/pulse" target="_blank" rel="noopener">
         <span class="emoji">📈</span>
-        <span class="meta">
-          <strong>GitHub Insights</strong>
-          <small>Repo traffic &amp; clones</small>
-        </span>
+        <span class="meta"><strong>GitHub Insights</strong><small>Repo traffic &amp; clones</small></span>
       </a>
       <a class="link-card" href="https://alabaseery.app.n8n.cloud/" target="_blank" rel="noopener">
         <span class="emoji">🤖</span>
-        <span class="meta">
-          <strong>n8n Workflows</strong>
-          <small>Chatbot executions log</small>
-        </span>
+        <span class="meta"><strong>n8n Workflows</strong><small>Chatbot executions log</small></span>
       </a>
       <a class="link-card" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">
         <span class="emoji">☁️</span>
-        <span class="meta">
-          <strong>Cloudflare</strong>
-          <small>DNS &amp; domain control</small>
-        </span>
+        <span class="meta"><strong>Cloudflare</strong><small>DNS &amp; domain control</small></span>
       </a>
+    </div>
+
+    <div class="warn-banner">
+      ⚠️ <b>Heads up:</b> the on-page counters above live on a free public API
+      (<code>abacus.jasoncameron.dev</code>). The PIN protects this dashboard,
+      but anyone who knows the namespace can also read those numbers via the
+      API directly. They are aggregate counts only — no personal data.
+      For sensitive analytics (visitor IPs, emails, etc.) use the external
+      dashboards above (Google Analytics, Web3Forms).
     </div>
   </div>
 
   <div class="footer">
-    Counters powered by a public API · auto-refresh every 60s ·
-    <a href="#" id="logoutBtn">Lock dashboard</a>
+    Auto-locks after 5 min idle · max 10 min per session ·
+    <a href="#" id="logoutBtn">Lock now</a>
   </div>
 </div>
 
 <script>
   // ============================================================
-  // CHANGE THIS PIN — anyone with the URL can guess. 4 digits only.
-  // To change: edit this number, push, refresh dashboard.
+  // CONFIG — change PIN by setting PIN_HASH below.
+  //
+  // To change your PIN:
+  //   1. Open browser DevTools → Console.
+  //   2. Run:  await sha256('YOUR_NEW_6_DIGIT_PIN')
+  //   3. Copy the long hex string and replace PIN_HASH below.
+  //   4. Push and reload.
+  //
+  // Default PIN below = 202605 (CHANGE IT before going public!).
+  // Storing a hash, not plain text, means View Source no longer
+  // reveals your actual digits.
   // ============================================================
-  const PIN = '2025';
+  const PIN_HASH = 'dc091e2936acae646078be694deac4d22a533e19cdd67be2efa6d812fcc41184';
 
-  // Counter API (free, no signup): https://abacus.jasoncameron.dev/
-  const ANALYTICS_NS = 'omaralabaseery';
+  const SESSION_TTL_MS    = 10 * 60 * 1000;   // total session: 10 min
+  const INACTIVITY_TTL_MS =  5 * 60 * 1000;   // idle:           5 min
+  const MAX_ATTEMPTS      = 5;
+  const LOCKOUT_MS        = 60 * 1000;        // 60s lockout after MAX_ATTEMPTS
+
+  const ANALYTICS_NS   = 'omaralabaseery';
   const ANALYTICS_BASE = 'https://abacus.jasoncameron.dev';
-
   const STAT_KEYS = [
     'views', 'emails', 'chats', 'cv_downloads',
     'hire_clicks', 'projects_clicks', 'theme_toggles', 'lang_toggles'
   ];
 
-  // ---- PIN gate ----
+  // ---- Helpers ----
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf))
+      .map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  window.sha256 = sha256; // expose for the "set new PIN" workflow
+
+  // ---- DOM ----
   const gate = document.getElementById('gate');
   const dash = document.getElementById('dash');
   const pinInput = document.getElementById('pinInput');
   const pinBtn = document.getElementById('pinBtn');
   const pinError = document.getElementById('pinError');
+  const pinAttempts = document.getElementById('pinAttempts');
+  const sessionTimerEl = document.getElementById('sessionTimer');
 
+  // ---- State ----
+  let unlockedAt = 0;
+  let lastActivityAt = 0;
+  let sessionInterval = null;
+
+  // ---- Brute-force tracking (persisted in localStorage so reloads can't reset it) ----
+  function getAttempts() {
+    try { return JSON.parse(localStorage.getItem('dash-attempts') || '{"count":0,"lockedUntil":0}'); }
+    catch { return { count: 0, lockedUntil: 0 }; }
+  }
+  function setAttempts(a) {
+    localStorage.setItem('dash-attempts', JSON.stringify(a));
+  }
+  function isLockedOut() {
+    return getAttempts().lockedUntil > Date.now();
+  }
+
+  // ---- Session ----
+  function isSessionValid() {
+    const sess = sessionStorage.getItem('dash-sess');
+    if (!sess) return false;
+    try {
+      const { unlockedAt: u, lastActivityAt: la } = JSON.parse(sess);
+      const now = Date.now();
+      if (now - u   > SESSION_TTL_MS)    return false;
+      if (now - la  > INACTIVITY_TTL_MS) return false;
+      unlockedAt = u; lastActivityAt = la;
+      return true;
+    } catch { return false; }
+  }
+  function persistSession() {
+    sessionStorage.setItem('dash-sess', JSON.stringify({ unlockedAt, lastActivityAt }));
+  }
+  function clearSession() {
+    sessionStorage.removeItem('dash-sess');
+    unlockedAt = 0;
+    lastActivityAt = 0;
+  }
+  function bumpActivity() {
+    if (!unlockedAt) return;
+    lastActivityAt = Date.now();
+    persistSession();
+  }
+  function startSessionWatch() {
+    ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(ev =>
+      document.addEventListener(ev, bumpActivity, { passive: true })
+    );
+    sessionInterval = setInterval(() => {
+      const now = Date.now();
+      const remainSession  = SESSION_TTL_MS    - (now - unlockedAt);
+      const remainIdle     = INACTIVITY_TTL_MS - (now - lastActivityAt);
+      const remain = Math.min(remainSession, remainIdle);
+      if (remain <= 0) { lock(); return; }
+      const m = Math.floor(remain / 60000);
+      const s = Math.floor((remain % 60000) / 1000);
+      sessionTimerEl.textContent = m + ':' + String(s).padStart(2, '0');
+    }, 1000);
+  }
+
+  // ---- Lock / unlock ----
+  let statsInterval = null;
   function unlock() {
-    sessionStorage.setItem('dash-unlocked', '1');
+    unlockedAt = Date.now();
+    lastActivityAt = unlockedAt;
+    persistSession();
+    setAttempts({ count: 0, lockedUntil: 0 });
     gate.hidden = true;
     dash.hidden = false;
     loadStats();
-    setInterval(loadStats, 60_000);
+    if (statsInterval) clearInterval(statsInterval);
+    statsInterval = setInterval(loadStats, 60_000);
+    startSessionWatch();
+  }
+  function lock() {
+    clearSession();
+    if (sessionInterval) { clearInterval(sessionInterval); sessionInterval = null; }
+    if (statsInterval)   { clearInterval(statsInterval);   statsInterval   = null; }
+    dash.hidden = true;
+    gate.hidden = false;
+    pinInput.value = '';
+    pinError.textContent = 'Locked. Re-enter PIN.';
+    pinInput.focus();
   }
 
-  function tryPin() {
+  // ---- PIN check + brute-force lockout ----
+  function showLockedMessage() {
+    pinInput.disabled = true;
+    pinBtn.disabled = true;
+    const tick = setInterval(() => {
+      const r = Math.max(0, Math.ceil((getAttempts().lockedUntil - Date.now()) / 1000));
+      if (r <= 0) {
+        clearInterval(tick);
+        pinError.textContent = '';
+        pinInput.disabled = false;
+        pinBtn.disabled = false;
+        pinInput.focus();
+      } else {
+        pinError.textContent = 'Too many attempts. Locked for ' + r + 's.';
+      }
+    }, 500);
+  }
+
+  async function tryPin() {
+    if (isLockedOut()) { showLockedMessage(); return; }
     const v = pinInput.value.trim();
-    if (v === PIN) {
+    if (!v) return;
+
+    const hash = await sha256(v);
+    if (hash === PIN_HASH) {
       pinError.textContent = '';
+      pinAttempts.textContent = '';
       unlock();
+      return;
+    }
+
+    const a = getAttempts();
+    a.count = (a.count || 0) + 1;
+    if (a.count >= MAX_ATTEMPTS) {
+      a.lockedUntil = Date.now() + LOCKOUT_MS;
+      a.count = 0;
+      setAttempts(a);
+      showLockedMessage();
     } else {
-      pinError.textContent = 'Incorrect PIN. Try again.';
+      setAttempts(a);
+      pinError.textContent = 'Incorrect PIN.';
+      pinAttempts.textContent = (MAX_ATTEMPTS - a.count) + ' attempts remaining';
       pinInput.value = '';
       pinInput.focus();
     }
@@ -401,15 +537,28 @@
   pinBtn.addEventListener('click', tryPin);
   pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryPin(); });
 
-  // Auto-unlock if previously verified this session
-  if (sessionStorage.getItem('dash-unlocked') === '1') unlock();
-
-  // ---- Stats fetcher ----
-  function fmt(n) {
-    return new Intl.NumberFormat().format(n);
+  // ---- Boot ----
+  if (isSessionValid()) {
+    unlock();
+  } else if (isLockedOut()) {
+    showLockedMessage();
   }
 
+  // Auto-lock if tab was hidden long enough to invalidate the session
+  let hiddenAt = 0;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      hiddenAt = Date.now();
+    } else if (hiddenAt && (Date.now() - hiddenAt > INACTIVITY_TTL_MS)) {
+      lock();
+    }
+  });
+
+  // ---- Stats fetcher ----
+  function fmt(n) { return new Intl.NumberFormat().format(n); }
+
   async function loadStats() {
+    if (dash.hidden) return; // never fetch while locked
     const updates = STAT_KEYS.map(async (key) => {
       const el = document.querySelector('[data-stat="' + key + '"]');
       try {
@@ -430,15 +579,13 @@
 
   document.getElementById('refreshBtn').addEventListener('click', (e) => {
     e.preventDefault();
+    bumpActivity();
     document.querySelectorAll('.stat-value').forEach(el => el.classList.add('loading'));
     loadStats();
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    sessionStorage.removeItem('dash-unlocked');
-    location.reload();
-  });
+  document.getElementById('lockBtn').addEventListener('click', (e) => { e.preventDefault(); lock(); });
+  document.getElementById('logoutBtn').addEventListener('click', (e) => { e.preventDefault(); lock(); });
 </script>
 </body>
 </html>
